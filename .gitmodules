@@ -1,3 +1,6 @@
 [submodule "libft"]
 	path = lib/libft
 	url = https://github.com/CodinaFJ/libft.git
+[submodule "lib/data_structures_C"]
+	path = lib/data_structures_C
+	url = https://github.com/CodinaFJ/data_structures_C.git
