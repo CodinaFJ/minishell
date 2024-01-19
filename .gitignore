@@ -56,4 +56,3 @@ dkms.conf
 .vscode/
 
 *.DS_Store
-lib/data_structures_C
