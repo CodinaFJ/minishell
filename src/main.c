@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/21 12:44:18 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:28:20 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(void)
 	{
 		ft_printf("BashCrandicoot> ");
 		str = get_next_line(0);
+		read_command(str);
 		if (!assert_input(str))
 		{
 			free(str);

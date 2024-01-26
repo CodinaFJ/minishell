@@ -6,15 +6,17 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/23 19:32:05 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:09:28 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-#include "../lib/libft/include/libft.h"
-#include "../lib/data_structures_C/include/data_structures.h"
+# include "../lib/libft/include/libft.h"
+# include "../lib/data_structures_C/include/data_structures.h"
+# include "../src/automata/automata.h"
 
 
+void	read_command(char *str);
 
 #endif

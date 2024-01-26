@@ -24,8 +24,10 @@ SRC_DIR	=	./src/
 
 MS_DIR =		./
 LEXER_DIR =		lexer/
+AUTOMATA_DIR =	automata/
 
-BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))	\
+BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
+				$(addprefix $(BIN_DIR), $(AUTOMATA_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
 ########################################################################################\
@@ -36,7 +38,11 @@ MS_FILES	=	main
 
 LEXER_FILES	=	lexer
 
-FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))			\
+AUTOMATA_FILES	=	automata_init	\
+					automata
+
+FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
+			$(addprefix $(AUTOMATA_DIR), $(AUTOMATA_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
