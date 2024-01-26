@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 17:41:07 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:44:51 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	automata_evaluate(t_automata *automata, char *str)
 		automata->prev_state = automata->state;
 		automata->cursor++;
 	}
+	automata->end_eval_action(automata, automata->ctx);
 	free(automata->str);
 	return (automata->state);
 }

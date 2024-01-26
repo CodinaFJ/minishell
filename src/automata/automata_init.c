@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:11:02 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 18:04:02 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:44:24 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,39 @@ int	minishell_get_state(int i, int j)
 	return (state[i][j]);
 }
 
+void	minishell_state_trans_init(t_automata *automata)
+{
+	automata->state_trans_action[CHARACTER][PIPE] = get_token;
+	automata->state_trans_action[CHARACTER][LESS] = get_token;
+	automata->state_trans_action[CHARACTER][GREATER] = get_token;
+	automata->state_trans_action[CHARACTER][AMPERSAND] = get_token;
+	automata->state_trans_action[SEPARATION][PIPE] = get_token;
+	automata->state_trans_action[SEPARATION][LESS] = get_token;
+	automata->state_trans_action[SEPARATION][GREATER] = get_token;
+	automata->state_trans_action[SEPARATION][AMPERSAND] = get_token;
+	automata->state_trans_action[PIPE][SEPARATION] = get_token;
+	automata->state_trans_action[OR][SEPARATION] = get_token;
+	automata->state_trans_action[AND][SEPARATION] = get_token;
+	automata->state_trans_action[LESS][SEPARATION] = get_token;
+	automata->state_trans_action[HEREDOC][SEPARATION] = get_token;
+	automata->state_trans_action[GREATER][SEPARATION] = get_token;
+	automata->state_trans_action[APPEND][SEPARATION] = get_token;
+	automata->state_trans_action[PIPE][CHARACTER] = get_token;
+	automata->state_trans_action[OR][CHARACTER] = get_token;
+	automata->state_trans_action[AND][CHARACTER] = get_token;
+	automata->state_trans_action[LESS][CHARACTER] = get_token;
+	automata->state_trans_action[HEREDOC][CHARACTER] = get_token;
+	automata->state_trans_action[GREATER][CHARACTER] = get_token;
+	automata->state_trans_action[APPEND][CHARACTER] = get_token;
+}
+
 void	automata_init(t_automata *automata, void *context)
 {
 	//ft_printf("Automata initialization\n");
 	ft_bzero(automata, sizeof(t_automata));
 	minishell_alphabet_init(automata);
+	minishell_state_trans_init(automata);
+	automata->end_eval_action = get_token;
 	automata->get_state = minishell_get_state;
 	automata->ctx = context;
 }

@@ -38,7 +38,8 @@ MS_FILES	=	main
 
 LEXER_FILES	=	lexer
 
-AUTOMATA_FILES	=	automata_init	\
+AUTOMATA_FILES	=	automata_init		\
+					automata_actions	\
 					automata
 
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
