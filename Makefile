@@ -24,6 +24,7 @@ SRC_DIR	=	./src/
 
 MS_DIR =		./
 LEXER_DIR =		lexer/
+BUILTINS_DIR =		builtins/
 
 BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
@@ -36,8 +37,11 @@ MS_FILES	=	main
 
 LEXER_FILES	=	lexer
 
+BUILTINS_FILES	=	builtins
+
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))			\
-			$(addprefix $(LEXER_DIR), $(LEXER_FILES))
+			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   \
+			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 OBJS	=	$(addprefix $(BIN_DIR), $(addsuffix .o, $(FILES)))
