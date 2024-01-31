@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marubio- <marubio-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:19:35 by marubio-          #+#    #+#             */
-/*   Updated: 2024/01/27 12:21:24 by marubio-         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:34:59 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtin.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-//lo del  extern char **environ; no se si es legal
-void ft_env(void) 
+//! lo del  extern char **environ; no se si es legal
+void ft_env(char *args) 
 {
     extern char **environ;
     char **env = environ;
 
+    ft_printf("env called\n");
+    (void) args;
     while (*env != NULL) 
     {
         printf("%s\n", *env);
@@ -27,7 +30,7 @@ void ft_env(void)
     }
 }
 
-int main() 
+/*int main() 
 {
     char input[256];
 
@@ -45,4 +48,4 @@ int main()
 
     return (0);
 }
-
+*/

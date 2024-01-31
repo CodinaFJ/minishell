@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 18:42:26 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:42:33 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	do_minishell(char **tokens)
 {
+	t_builtin	**builtins_array;
+
+	builtins_array = get_builtins_array();
+	if (tokens[1] == NULL)
+		try_exec_builtin(builtins_array, ft_strtrim(tokens[0], "\n"), "");
+	else
+		try_exec_builtin(builtins_array, tokens[0], tokens[1]);
 	ft_strs_free(tokens);
 }
 

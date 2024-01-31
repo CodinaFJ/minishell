@@ -25,9 +25,10 @@ SRC_DIR	=	./src/
 MS_DIR =		./
 LEXER_DIR =		lexer/
 AUTOMATA_DIR =	automata/
-BUILTINS_DIR =		builtins/
+BUILTINS_DIR =	builtins/
 
 BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
+				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))	\
 				$(addprefix $(BIN_DIR), $(AUTOMATA_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
@@ -39,7 +40,14 @@ MS_FILES	=	main
 
 LEXER_FILES	=	lexer
 
-BUILTINS_FILES	=	builtins
+BUILTINS_FILES	=	builtin		\
+					ft_cd		\
+					ft_echo		\
+					ft_env		\
+					ft_exit		\
+					ft_export	\
+					ft_pwd		\
+					ft_unset	
 
 AUTOMATA_FILES	=	automata_init		\
 					automata_actions	\
@@ -47,7 +55,7 @@ AUTOMATA_FILES	=	automata_init		\
 
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
 			$(addprefix $(AUTOMATA_DIR), $(AUTOMATA_FILES))	\
-			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   \
+			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   	\
 			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))

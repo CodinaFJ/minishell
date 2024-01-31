@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marubio- <marubio-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:43:01 by marubio-          #+#    #+#             */
-/*   Updated: 2024/01/27 12:23:12 by marubio-         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:35:21 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+#include "builtin.h"
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
-//lo del buffer[256] hay que arreglarlo
-void ft_pwd(void) 
+// TODO: lo del buffer[256] hay que arreglarlo
+void ft_pwd(char *args) 
 {
     char cwd[256];
+
+    (void) args;
+    ft_printf("pwd called\n");
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
         printf("%s\n", cwd);
     } else {
@@ -27,7 +31,7 @@ void ft_pwd(void)
     }
 }
 
-int main() 
+/*int main() 
 {
     char input[256];
 
@@ -43,4 +47,4 @@ int main()
     }
 
     return (0);
-}
+}*/

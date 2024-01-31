@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marubio- <marubio-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:46 by marubio-          #+#    #+#             */
-/*   Updated: 2024/01/27 12:22:40 by marubio-         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:34:37 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtin.h"
 #include <stdio.h>
 #include <string.h>
 
-//no consigo gestionar bien comillas dobles (""hola"" se devuelve como hola"")
+// TODO: no consigo gestionar bien comillas dobles (""hola"" se devuelve como hola"")
 void ft_echo(char *args) 
 {
     args = args + 4;
@@ -21,7 +22,7 @@ void ft_echo(char *args)
     while (*args == ' ')
         args++;
 
-   
+    ft_printf("Echo called\n");
     if (*args == '\0') 
 	{
         printf("\n");
@@ -74,7 +75,7 @@ void ft_echo(char *args)
         printf("\n");
 }
 
-int main() 
+/*int main() 
 {
     char input[256];
 
@@ -92,3 +93,4 @@ int main()
     }
     return (0);
 }
+*/

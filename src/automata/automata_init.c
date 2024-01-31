@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:11:02 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 18:44:24 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:24:45 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	minishell_get_state(int i, int j)
 		{12,  3,  7,  8,  5,  2,  1, 13}, // 12 Separation
 		{12,  3,  7,  8,  5,  2,  1, 13}, // 13 Normal input (not operator)
 	};
-	//ft_printf("From state i(%d) receive j(%d) -> %d\n", i, j, state[i][j]);
+	////ft_printf("From state i(%d) receive j(%d) -> %d\n", i, j, state[i][j]);
 	return (state[i][j]);
 }
 

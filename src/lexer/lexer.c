@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:20:23 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 17:37:44 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:16:13 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	read_command(char *str)
 	int			state;
 
 	automata_init(&automata, NULL);
-	state = automata_evaluate(&automata, str);
+	state = automata_evaluate(&automata, str);	
 	ft_printf("Automata ended in state: %d\n", state);
 	
 }

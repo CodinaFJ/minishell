@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 17:09:28 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:27:29 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../lib/libft/include/libft.h"
 # include "../lib/data_structures_C/include/data_structures.h"
 # include "../src/automata/automata.h"
+# include "../src/builtins/builtin.h"
 
 
 void	read_command(char *str);
