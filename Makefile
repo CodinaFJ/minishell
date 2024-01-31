@@ -24,9 +24,11 @@ SRC_DIR	=	./src/
 
 MS_DIR =		./
 LEXER_DIR =		lexer/
+AUTOMATA_DIR =	automata/
 BUILTINS_DIR =		builtins/
 
-BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))	\
+BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
+				$(addprefix $(BIN_DIR), $(AUTOMATA_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
 ########################################################################################\
@@ -39,7 +41,12 @@ LEXER_FILES	=	lexer
 
 BUILTINS_FILES	=	builtins
 
-FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))			\
+AUTOMATA_FILES	=	automata_init		\
+					automata_actions	\
+					automata
+
+FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
+			$(addprefix $(AUTOMATA_DIR), $(AUTOMATA_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   \
 			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 
