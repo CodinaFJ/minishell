@@ -3,12 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marubio- <marubio-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:42:53 by marubio-          #+#    #+#             */
-/*   Updated: 2024/01/27 12:18:56 by marubio-         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:54:51 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+
+void ft_exit(char *args)
+{
+	(void) args;
+	exit(1);
+} 
