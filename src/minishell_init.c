@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 19:20:23 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/01 21:51:20 by jcodina-         ###   ########.fr       */
+/*   Created: 2024/02/01 21:42:08 by jcodina-          #+#    #+#             */
+/*   Updated: 2024/02/01 21:51:04 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 
-void	read_command(char *str, t_minishell_ctx *ctx)
+void	minishell_init(t_minishell_ctx *ctx)
 {
-	int			state;
-
-	state = automata_evaluate(ctx->automata, str);	
-	ft_printf("Automata ended in state: %d\n", state);
-}
-
-void	lexer_init(t_minishell_ctx *ctx)
-{
-	ctx->automata = automata_init(NULL);	
+	signals_init();
+	lexer_init(ctx);	
 }

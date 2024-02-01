@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:11:02 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/31 19:24:45 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:34:25 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	minishell_get_state(int i, int j)
 		{12,  3,  7,  8,  5,  2,  1, 13}, // 12 Separation
 		{12,  3,  7,  8,  5,  2,  1, 13}, // 13 Normal input (not operator)
 	};
-	////ft_printf("From state i(%d) receive j(%d) -> %d\n", i, j, state[i][j]);
+	//ft_printf("From state i(%d) receive j(%d) -> %d\n", i, j, state[i][j]);
 	return (state[i][j]);
 }
 
@@ -76,13 +76,18 @@ void	minishell_state_trans_init(t_automata *automata)
 	automata->state_trans_action[APPEND][CHARACTER] = get_token;
 }
 
-void	automata_init(t_automata *automata, void *context)
+t_automata	*automata_init(void *context)
 {
+	t_automata	*automata;
+	
 	//ft_printf("Automata initialization\n");
-	ft_bzero(automata, sizeof(t_automata));
+	automata = ft_calloc(1, sizeof(t_automata));
+	if (automata == NULL)
+		return (NULL);
 	minishell_alphabet_init(automata);
 	minishell_state_trans_init(automata);
 	automata->end_eval_action = get_token;
 	automata->get_state = minishell_get_state;
 	automata->ctx = context;
+	return (automata);
 }

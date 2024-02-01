@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:51:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/26 18:44:06 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:33:24 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ typedef enum	e_automata_state
 	CHARACTER
 }	t_automata_state;
 
-typedef	struct s_minishell_ctx
-{
-	char	**tokens;
-}	t_minishell_ctx;
-
 typedef struct s_automata
 {
 	void	*ctx;
@@ -54,8 +49,9 @@ typedef struct s_automata
 	int		(*get_state)(int state, int char_index);
 }	t_automata;
 
-int		automata_evaluate(t_automata *automata, char *str);
-void	automata_init(t_automata *automata, void *ctx);
-void	get_token(t_automata *automata, void *ctx);
+int			automata_evaluate(t_automata *automata, char *str);
+t_automata	*automata_init(void *ctx);
+void		get_token(t_automata *automata, void *ctx);
+int			minishell_get_state(int i, int j);
 
 #endif

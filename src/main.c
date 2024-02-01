@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/01/31 20:42:33 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:50:34 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,22 @@ t_bool	assert_input(char *input)
 	return (true);
 }
 
+void	start_ctx(t_minishell_ctx *ctx)
+{
+	(void) ctx;
+}
+
 int	main(void)
 {
-	char *str;
+	char 			*str;
+	t_minishell_ctx	ctx;
 	
+	minishell_init(&ctx);
 	while (1)
 	{
-		ft_printf("\033[32;1mBashCrandicoot> \033[0;39m");
+		ft_printf(SHELL_PROMT);
 		str = get_next_line(0);
-		read_command(str);
+		read_command(str, &ctx);
 		if (!assert_input(str))
 		{
 			free(str);

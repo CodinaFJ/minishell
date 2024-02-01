@@ -26,9 +26,11 @@ MS_DIR =		./
 LEXER_DIR =		lexer/
 AUTOMATA_DIR =	automata/
 BUILTINS_DIR =	builtins/
+SIGNALS_DIR = 	signals/
 
 BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
 				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))	\
+				$(addprefix $(BIN_DIR), $(SIGNALS_DIR))		\
 				$(addprefix $(BIN_DIR), $(AUTOMATA_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
@@ -36,26 +38,31 @@ BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
 Sources & objects
 ########################################################################################
 
-MS_FILES	=	main
+MS_FILES	=	main			\
+				minishell_init	\
 
 LEXER_FILES	=	lexer
 
-BUILTINS_FILES	=	builtin		\
-					ft_cd		\
-					ft_echo		\
-					ft_env		\
-					ft_exit		\
-					ft_export	\
-					ft_pwd		\
+BUILTINS_FILES	=	builtin			\
+					builtins_array	\
+					ft_cd			\
+					ft_echo			\
+					ft_env			\
+					ft_exit			\
+					ft_export		\
+					ft_pwd			\
 					ft_unset	
 
 AUTOMATA_FILES	=	automata_init		\
 					automata_actions	\
 					automata
 
+SIGNALS_FILES	=	signals
+
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
 			$(addprefix $(AUTOMATA_DIR), $(AUTOMATA_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   	\
+			$(addprefix $(SIGNALS_DIR), $(SIGNALS_FILES))  	\
 			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
