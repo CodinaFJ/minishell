@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:51:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 17:34:43 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:14:55 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef struct s_automata
 
 int			automata_evaluate(t_automata *automata, char *str);
 t_automata	*automata_init(void *ctx);
-void		get_token(t_automata *automata, void *ctx);
+void		get_token_oprtr(t_automata *automata, void *ctx);
+void		get_token_command(t_automata *automata, void *ctx);
 int			automata_get_state(int i, int j);
 void		end_evaluation(t_automata *automata, void *ctx);
 
