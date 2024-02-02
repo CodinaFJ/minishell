@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 10:13:08 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:33:35 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(void)
 	{
 		ft_printf(SHELL_PROMT);
 		str = get_next_line(0);
-		ft_printf("After gnl\n");
 		read_command(str, &ctx);
 		if (!assert_input(str))
 		{
