@@ -18,7 +18,7 @@ void	get_token_command(t_automata *automata, void *ctx)
 
 	(void) ctx;
 	ft_printf("get_token_command\n");
-	token = ft_strtrim(ft_substr(automata->str, automata->cursor_pre, automata->cursor - automata->cursor_pre), " ");
+	token = ft_strtrim(ft_substr(automata->str, automata->cursor_pre, automata->cursor - automata->cursor_pre), " ");// !This line leaks memory
 	automata->cursor_pre = automata->cursor;
 	tokenbt_insert_comm_word(automata->ctx, token);
 	free(token);
@@ -30,7 +30,7 @@ void	get_token_oprtr(t_automata *automata, void *ctx)
 
 	(void) ctx;
 	ft_printf("get_token_oprtr\n");
-	token = ft_strtrim(ft_substr(automata->str, automata->cursor_pre, automata->cursor - automata->cursor_pre), " ");
+	token = ft_strtrim(ft_substr(automata->str, automata->cursor_pre, automata->cursor - automata->cursor_pre), " ");// !This line leaks
 	automata->cursor_pre = automata->cursor;
 	tokenbt_insert_oprtr(automata->ctx, token);
 	free(token);
