@@ -41,7 +41,12 @@ Sources & objects
 MS_FILES	=	main			\
 				minishell_init	\
 
-LEXER_FILES	=	lexer
+LEXER_FILES	=	lexer			\
+				token			\
+				token_args		\
+				operator		\
+				command			\
+				command_args
 
 BUILTINS_FILES	=	builtin			\
 					builtins_array	\
@@ -53,8 +58,9 @@ BUILTINS_FILES	=	builtin			\
 					ft_pwd			\
 					ft_unset	
 
-AUTOMATA_FILES	=	automata_init		\
-					automata_actions	\
+AUTOMATA_FILES	=	automata_init			\
+					automata_actions		\
+					automata_actions_init	\
 					automata
 
 SIGNALS_FILES	=	signals
