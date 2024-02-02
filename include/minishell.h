@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/01 22:01:53 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:56:40 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct s_minishell_ctx
 {
 	t_automata	*automata;
+	t_builtin	**builtins;
 }	t_minishell_ctx;
 
 /* ************************************************************************** */

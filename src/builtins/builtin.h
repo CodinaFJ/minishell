@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:42:06 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/01 15:57:08 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:58:28 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_builtin
 
 t_builtin	*builtin_new(char *name, void (*f)(char *args));
 void		builtin_free(t_builtin *builtin);
-t_builtin	**get_builtins_array();
-void		try_exec_builtin(t_builtin **builtins_array, char *name, char *args);
+t_builtin	**builtins_init();
+t_bool		try_exec_builtin(t_builtin **builtins_array, char *name, char *args);
 
 
 void ft_echo(char *args);

@@ -12,7 +12,7 @@
 
 #include "builtin.h"
 
-t_builtin	**get_builtins_array()
+t_builtin	**builtins_init()
 {
 	t_builtin	**builtins_array;
 	int			i;
@@ -30,7 +30,7 @@ t_builtin	**get_builtins_array()
 	return (builtins_array);
 }
 
-void	try_exec_builtin(t_builtin **builtins_array, char *name, char *args)
+t_bool	try_exec_builtin(t_builtin **builtins_array, char *name, char *args)
 {
 	int	i;
 
@@ -41,8 +41,9 @@ void	try_exec_builtin(t_builtin **builtins_array, char *name, char *args)
 		if (ft_strcmp(builtins_array[i]->name, name) == 0)
 		{
 			builtins_array[i]->f(args);
-			return ;
+			return (true);
 		}
 		i++;
 	}
+	return (false);
 }
