@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:51:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/01 21:33:24 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:34:43 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 # define AUTOMATA_H
 # include "../../lib/libft/include/libft.h"
 # define ALPHABET_LEN 7
+# define AUTOMATA_STATES 14
 
 typedef enum	e_automata_state
 {
 	EMPTY,
+	WORD,
 	DOUBLE_QUOTES,
 	SINGLE_QUOTES,
 	PIPE,
-	OR,
-	AMPERSAND,
-	AND,
+	PIPE2,
+	AMP,
+	AMP2,
 	LESS,
-	GREATER,
-	HEREDOC,
-	APPEND,
-	INVALID,
-	SEPARATION,
-	CHARACTER
+	LESS2,
+	MORE,
+	MORE2,
+	TENT_TOKEN_END,
+	TOKEN_END,
+	ERROR
 }	t_automata_state;
 
 typedef struct s_automata
@@ -52,6 +54,10 @@ typedef struct s_automata
 int			automata_evaluate(t_automata *automata, char *str);
 t_automata	*automata_init(void *ctx);
 void		get_token(t_automata *automata, void *ctx);
-int			minishell_get_state(int i, int j);
+int			automata_get_state(int i, int j);
+void		end_evaluation(t_automata *automata, void *ctx);
+
+void	minishell_actions_init(t_automata *automata);
+
 
 #endif
