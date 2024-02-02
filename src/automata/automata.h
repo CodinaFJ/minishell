@@ -6,13 +6,14 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:51:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 18:14:55 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:13:07 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AUTOMATA_H
 # define AUTOMATA_H
 # include "../../lib/libft/include/libft.h"
+# include "../lexer/token.h"
 # define ALPHABET_LEN 7
 # define AUTOMATA_STATES 14
 

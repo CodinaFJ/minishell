@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:37:42 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 13:01:11 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:59:41 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ void	token_print(void *token)
 	t_token	*_token;
 
 	_token = (t_token *) token;
-	ft_printf("-----TOKEN-----\n");
-	if (_token->id == COMMAND)
+	if (token == NULL)
+		return ;
+	ft_printf("\n-----TOKEN-----\n");
+	if (_token->id == COMMAND &&  _token->content != NULL)
 	{
 		ft_printf("ID [COMMAND]\n");
 		command_print((t_command *) _token->content);
 	}
-	else if (_token->id == OPERATOR)
+	else if (_token->id == OPERATOR &&  _token->content != NULL)
 	{
 		ft_printf("ID [OPERATOR]\n");
 		operator_print((t_operator *) _token->content);	
@@ -46,14 +48,22 @@ void	token_print(void *token)
 void	token_free(void *token)
 {
 	t_token	*_token;
-
+	
+	if (token == NULL)
+		return ;
 	_token = (t_token *) token;
-	if (_token->id == COMMAND)
+	if (_token->content != NULL)
 	{
-		command_free((t_command *) _token->content);
+		if (_token->id == COMMAND)
+		{
+			command_free((t_command *) _token->content);
+			_token->content = NULL;
+		}
+		else if (_token->id == OPERATOR)
+		{
+			operator_free((t_operator *) _token->content);
+			_token->content = NULL;	
+		}
 	}
-	else if (_token->id == OPERATOR)
-	{
-		operator_free((t_operator *) _token->content);	
-	}
+	free(_token);
 }

@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 17:38:57 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/02 20:57:20 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	automata_evaluate(t_automata *automata, char *str)
 
 	automata->str = ft_strtrim(str, "\n");
 	str_len = (int) ft_strlen(automata->str);
+	automata->ctx = btree_new(NULL);
 	automata->prev_state = EMPTY;
 	automata->state = EMPTY;
 	automata->cursor = 0;
@@ -71,6 +72,10 @@ int	automata_evaluate(t_automata *automata, char *str)
 		automata->cursor++;
 	}
 	automata->end_eval_action(automata, automata->ctx);
-	free(automata->str);
+	if (automata->str != NULL)
+	{
+		free(automata->str);
+		automata->str = NULL;
+	}
 	return (automata->state);
 }

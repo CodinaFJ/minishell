@@ -46,7 +46,8 @@ LEXER_FILES	=	lexer			\
 				token_args		\
 				operator		\
 				command			\
-				command_args
+				command_args	\
+				token_btree
 
 BUILTINS_FILES	=	builtin			\
 					builtins_array	\
