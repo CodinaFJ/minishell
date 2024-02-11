@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: marubio- <marubio-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:42:06 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 09:58:28 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:13:36 by marubio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void ft_echo(char *args);
 void ft_env(char *args);
 void ft_pwd(char *args);
 void ft_exit(char *args);
+void ft_cd(char *args);
 
 #endif

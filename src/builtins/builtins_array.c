@@ -26,6 +26,7 @@ t_builtin	**builtins_init()
 	builtins_array[i++] = builtin_new("env", ft_env);
 	builtins_array[i++] = builtin_new("pwd", ft_pwd);
 	builtins_array[i++] = builtin_new("exit", ft_exit);
+ 	builtins_array[i++] = builtin_new("cd", ft_cd);
 	builtins_array[i++] = NULL;
 	return (builtins_array);
 }

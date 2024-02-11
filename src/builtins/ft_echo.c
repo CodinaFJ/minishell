@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: marubio- <marubio-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:46 by marubio-          #+#    #+#             */
-/*   Updated: 2024/01/31 20:34:37 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:04:37 by marubio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 // TODO: no consigo gestionar bien comillas dobles (""hola"" se devuelve como hola"")
 void ft_echo(char *args) 
 {
-    args = args + 4;
-
     while (*args == ' ')
         args++;
 
