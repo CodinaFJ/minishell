@@ -135,4 +135,7 @@ re: fclean all
 norminette:
 	norminette $(SRC_DIR)
 
+run:
+	@$(NAME) && ([ $$? -eq 0 ] && echo "") || echo "" 		
+
 .PHONY: all clean fclean re norminette
