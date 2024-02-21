@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 18:34:21 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:30:36 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define MINISHELL_H
 # include "../lib/libft/include/libft.h"
 # include "../lib/data_structures_C/include/data_structures.h"
-# include "../src/automata/automata.h"
+# include "../src/automata/automata_lexer.h"
+# include "../src/automata/automata_parser.h"
 # include "../src/builtins/builtin.h"
 # include "../src/signals/signals.h"
 # define SHELL_PROMT "\033[32;1mBashCrandicoot> \033[0;39m"
