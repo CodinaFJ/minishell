@@ -17,19 +17,19 @@
 
 # include "automata.h"
 
-typedef enum	e_automata_state
+typedef enum	e_automata_parser_state
 {
-	EMPTY,
-	WORD,
-	DOUBLE_QUOTES,
-	SINGLE_QUOTES,
-	DOLLAR,
-	TENT_TOKEN_END,
-	TOKEN_END,
-	ERROR
-}	t_automata_state;
+	P_EMPTY,
+	P_WORD,
+	P_DOUBLE_QUOTES,
+	P_SINGLE_QUOTES,
+	P_DOLLAR,
+	P_TENT_TOKEN_END,
+	P_TOKEN_END,
+	P_ERROR
+}	t_automata_parser_state;
 
-t_automata	*automata_init_parser(void *ctx);
+t_automata	*automata_init_parser(void);
 int			automata_get_state(int i, int j);
 
 #endif

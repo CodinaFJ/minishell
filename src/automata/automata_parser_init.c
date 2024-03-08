@@ -12,7 +12,7 @@
 
 #include "automata_parser.h"
 
-void	minishell_alphabet_init(t_automata *automata)
+void	minishell_alphabet_parser_init(t_automata *automata)
 {
 	automata->alphabet = ft_calloc(ALPHABET_LEN + 1, sizeof(char *));
 	if (automata->alphabet == NULL)
@@ -27,26 +27,18 @@ void	minishell_alphabet_init(t_automata *automata)
 	ft_strs_add_line(">", automata->alphabet);
 }
 
-void	minishell_errors_init(t_automata	*automata)
+void	minishell_errors_parser_init(t_automata	*automata)
 {
 	automata->errors = ft_calloc(AUTOMATA_STATES + 1, sizeof(char *));
 	if (automata->errors == NULL)
 		return ;
-	automata->errors[EMPTY] = ft_strdup("Empty string");
-	automata->errors[DOUBLE_QUOTES] = ft_strdup("Open operator [\"]");
-	automata->errors[SINGLE_QUOTES] = ft_strdup("Open operator [\']");
-	automata->errors[PIPE] = ft_strdup("Open operator [|]");
-	automata->errors[PIPE2] = ft_strdup("Open operator [||]");
-	automata->errors[AMP] = ft_strdup("Open operator [&]");
-	automata->errors[AMP2] = ft_strdup("Open operator [&&]");
-	automata->errors[LESS] = ft_strdup("Open operator [<]");
-	automata->errors[LESS2] = ft_strdup("Open operator [<<]");
-	automata->errors[MORE] = ft_strdup("Open operator [>]");
-	automata->errors[MORE2] = ft_strdup("Open operator [>>]");
-	automata->errors[ERROR] = ft_strdup("Invalid input");
+	automata->errors[P_EMPTY] = ft_strdup("Empty string");
+	automata->errors[P_DOUBLE_QUOTES] = ft_strdup("Open operator [\"]");
+	automata->errors[P_SINGLE_QUOTES] = ft_strdup("Open operator [\']");
+	automata->errors[P_ERROR] = ft_strdup("Invalid input");
 }
 
-t_automata	*automata_init_parser(void *ctx)
+t_automata	*automata_init_parser(void)
 {
 	t_automata	*automata;
 	
@@ -57,10 +49,9 @@ t_automata	*automata_init_parser(void *ctx)
 	automata->cursor = 0;
 	automata->cursor_pre = 0;
 	automata->state = 0;
-	minishell_alphabet_init(automata);
-	minishell_actions_init(automata);
-	minishell_errors_init(automata);
+	minishell_alphabet_parser_init(automata);
+	//minishell_actions_init(automata);
+	minishell_errors_parser_init(automata);
 	automata->get_state = automata_get_state;
-	automata->ctx = ctx;
 	return (automata);
 }

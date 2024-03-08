@@ -16,11 +16,11 @@ static void	trans_to_oprtr(t_automata *automata)
 {
 	int	i;
 
-	i = PIPE;
-	while (i <= MORE2)
+	i = L_PIPE;
+	while (i <= L_MORE2)
 	{
-		automata->state_trans_action[TENT_TOKEN_END][i] = get_token_command;
-		automata->state_trans_action[WORD][i] = get_token_command;
+		automata->state_trans_action[L_TENT_TOKEN_END][i] = get_token_command;
+		automata->state_trans_action[L_WORD][i] = get_token_command;
 		i++;
 	}
 }
@@ -29,24 +29,24 @@ static void	trans_from_oprtr(t_automata *automata)
 {
 	int	i;
 
-	i = PIPE;
-	while (i <= MORE2)
+	i = L_PIPE;
+	while (i <= L_MORE2)
 	{
-		automata->state_trans_action[i][DOUBLE_QUOTES] = get_token_oprtr;
-		automata->state_trans_action[i][SINGLE_QUOTES] = get_token_oprtr;
-		automata->state_trans_action[i][WORD] = get_token_oprtr;
-		automata->state_trans_action[i][TOKEN_END] = get_token_oprtr;
+		automata->state_trans_action[i][L_DOUBLE_QUOTES] = get_token_oprtr;
+		automata->state_trans_action[i][L_SINGLE_QUOTES] = get_token_oprtr;
+		automata->state_trans_action[i][L_WORD] = get_token_oprtr;
+		automata->state_trans_action[i][L_TOKEN_END] = get_token_oprtr;
 		i++;
 	}
 }
 
 static void trans_to_token_end(t_automata *automata)
 {
-	automata->state_trans_action[WORD][TOKEN_END] = get_token_command;
-	automata->state_trans_action[TENT_TOKEN_END][TOKEN_END] = get_token_command;
+	automata->state_trans_action[L_WORD][L_TOKEN_END] = get_token_command;
+	automata->state_trans_action[L_TENT_TOKEN_END][L_TOKEN_END] = get_token_command;
 }
 
-void	minishell_actions_init(t_automata *automata)
+void	minishell_actions_lexer_init(t_automata *automata)
 {
 	trans_to_oprtr(automata);
 	trans_from_oprtr(automata);

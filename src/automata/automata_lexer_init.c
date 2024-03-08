@@ -12,7 +12,7 @@
 
 #include "automata_lexer.h"
 
-void	minishell_alphabet_init(t_automata *automata)
+void	minishell_alphabet_lexer_init(t_automata *automata)
 {
 	automata->alphabet = ft_calloc(ALPHABET_LEN + 1, sizeof(char *));
 	if (automata->alphabet == NULL)
@@ -27,23 +27,23 @@ void	minishell_alphabet_init(t_automata *automata)
 	ft_strs_add_line(">", automata->alphabet);
 }
 
-void	minishell_errors_init(t_automata	*automata)
+void	minishell_errors_lexer_init(t_automata	*automata)
 {
 	automata->errors = ft_calloc(AUTOMATA_STATES + 1, sizeof(char *));
 	if (automata->errors == NULL)
 		return ;
-	automata->errors[EMPTY] = ft_strdup("Empty string");
-	automata->errors[DOUBLE_QUOTES] = ft_strdup("Open operator [\"]");
-	automata->errors[SINGLE_QUOTES] = ft_strdup("Open operator [\']");
-	automata->errors[PIPE] = ft_strdup("Open operator [|]");
-	automata->errors[PIPE2] = ft_strdup("Open operator [||]");
-	automata->errors[AMP] = ft_strdup("Open operator [&]");
-	automata->errors[AMP2] = ft_strdup("Open operator [&&]");
-	automata->errors[LESS] = ft_strdup("Open operator [<]");
-	automata->errors[LESS2] = ft_strdup("Open operator [<<]");
-	automata->errors[MORE] = ft_strdup("Open operator [>]");
-	automata->errors[MORE2] = ft_strdup("Open operator [>>]");
-	automata->errors[ERROR] = ft_strdup("Invalid input");
+	automata->errors[L_EMPTY] = ft_strdup("Empty string");
+	automata->errors[L_DOUBLE_QUOTES] = ft_strdup("Open operator [\"]");
+	automata->errors[L_SINGLE_QUOTES] = ft_strdup("Open operator [\']");
+	automata->errors[L_PIPE] = ft_strdup("Open operator [|]");
+	automata->errors[L_PIPE2] = ft_strdup("Open operator [||]");
+	automata->errors[L_AMP] = ft_strdup("Open operator [&]");
+	automata->errors[L_AMP2] = ft_strdup("Open operator [&&]");
+	automata->errors[L_LESS] = ft_strdup("Open operator [<]");
+	automata->errors[L_LESS2] = ft_strdup("Open operator [<<]");
+	automata->errors[L_MORE] = ft_strdup("Open operator [>]");
+	automata->errors[L_MORE2] = ft_strdup("Open operator [>>]");
+	automata->errors[L_ERROR] = ft_strdup("Invalid input");
 }
 
 int	automata_get_state(int i, int j)
@@ -70,7 +70,7 @@ int	automata_get_state(int i, int j)
 	return (state[i][j]);
 }
 
-t_automata	*automata_lexer_init(void *ctx)
+t_automata	*automata_lexer_init(void)
 {
 	t_automata	*automata;
 	
@@ -81,10 +81,9 @@ t_automata	*automata_lexer_init(void *ctx)
 	automata->cursor = 0;
 	automata->cursor_pre = 0;
 	automata->state = 0;
-	minishell_alphabet_init(automata);
-	minishell_actions_init(automata);
-	minishell_errors_init(automata);
+	minishell_alphabet_lexer_init(automata);
+	minishell_actions_lexer_init(automata);
+	minishell_errors_lexer_init(automata);
 	automata->get_state = automata_get_state;
-	automata->ctx = ctx;
 	return (automata);
 }

@@ -40,7 +40,8 @@ typedef struct s_automata
 /* ************************************************************************** */
 
 /*	Automata  																  */
-int			automata_evaluate(t_automata *automata, char *str);
+int			automata_evaluate(t_automata *automata, void * automata_ctx,
+				char *str);
 
 
 #endif

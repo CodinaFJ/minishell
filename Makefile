@@ -59,10 +59,11 @@ BUILTINS_FILES	=	builtin			\
 					ft_pwd			\
 					ft_unset	
 
-AUTOMATA_FILES	=	automata_init			\
-					automata_actions		\
-					automata_actions_init	\
-					automata
+AUTOMATA_FILES	=	automata_evaluate			\
+					automata_lexer_actions		\
+					automata_lexer_init			\
+					automata_lexer_transitions	\
+					automata_parser_init
 
 SIGNALS_FILES	=	signals
 

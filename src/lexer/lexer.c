@@ -19,12 +19,11 @@ void	read_command(char *str, t_minishell_ctx *ctx)
 
 	if (ctx->tokens_bt != NULL)
 		btree_clear(ctx->tokens_bt, token_free);
-	ctx->automata->ctx = ctx->tokens_bt;
-	state = automata_evaluate(ctx->automata, str);
+	state = automata_evaluate(ctx->automata, ctx->tokens_bt, str);
 	ft_printf("Automata ended in state: %d\n", state);
 }
 
 void	lexer_init(t_minishell_ctx *ctx)
 {
-	ctx->automata = automata_lexer_init(NULL);	
+	ctx->automata = automata_lexer_init();	
 }
