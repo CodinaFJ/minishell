@@ -29,6 +29,7 @@ typedef struct s_automata
 	int		state;
 	int		cursor;
 	int		cursor_pre;
+	int		str_len;
 	void	(*state_enter_action[20])(struct s_automata *a, void *ctx);
 	void	(*state_trans_action[20][20])(struct s_automata *a, void *ctx);
 	void	(*end_eval_action)(struct s_automata *a, void *ctx);

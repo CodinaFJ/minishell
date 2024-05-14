@@ -18,5 +18,5 @@ void	minishell_init(t_minishell_ctx *ctx)
 	ctx->builtins = builtins_init();
 	signals_init();
 	ctx->tokens_bt = btree_new(NULL);
-	lexer_init(ctx);
+	automatas_init(ctx);
 }

@@ -15,7 +15,7 @@
 # include "../lib/libft/include/libft.h"
 # include "../lib/data_structures_C/include/data_structures.h"
 # include "../src/automata/automata_lexer.h"
-# include "../src/automata/automata_parser.h"
+# include "../src/automata/automata_exp.h"
 # include "../src/builtins/builtin.h"
 # include "../src/signals/signals.h"
 # define SHELL_PROMT "\033[32;1mBashCrandicoot> \033[0;39m"
@@ -27,7 +27,8 @@
 
 typedef struct s_minishell_ctx
 {
-	t_automata	*automata;
+	t_automata	*automata_lexer;
+	t_automata	*automata_expander;
 	t_builtin	**builtins;
 	t_btree		*tokens_bt;
 }	t_minishell_ctx;
@@ -43,7 +44,7 @@ void	read_command(char *str, t_minishell_ctx *ctx);
 
 /*	Minishell init 															  */
 
-void	lexer_init(t_minishell_ctx *ctx);
+void	automatas_init(t_minishell_ctx *ctx);
 void	minishell_init(t_minishell_ctx *ctx);
 
 #endif

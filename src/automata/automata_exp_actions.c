@@ -10,40 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata.h"
+#include "automata_exp.h"
 
-void	get_token_command(t_automata *automata, void *ctx)
+void	end_exp_evaluation(t_automata *automata, void *ctx)
 {
-	char			*token;
+	char	*new_str;
+	char	*old_str;
 
-	(void) ctx;
-	ft_printf("get_token_command\n");
-	token = ft_strtrim(ft_substr(automata->str, automata->cursor_pre, automata->cursor - automata->cursor_pre), " ");// !This line leaks memory
-	automata->cursor_pre = automata->cursor;
-	tokenbt_insert_comm_word(ctx, token);
-	free(token);
-}
-
-void	get_token_oprtr(t_automata *automata, void *ctx)
-{
-	char			*token;
-
-	(void) ctx;
-	ft_printf("get_token_oprtr\n");
-	token = ft_strtrim(ft_substr(automata->str, automata->cursor_pre, automata->cursor - automata->cursor_pre), " ");// !This line leaks memory
-	automata->cursor_pre = automata->cursor;
-	tokenbt_insert_oprtr(ctx, token);
-	free(token);
-}
-
-void	end_evaluation(t_automata *automata, void *ctx)
-{
-	if (automata->errors[automata->state] != NULL)
+	old_str = (char *) ctx;
+	// FUNCTION TO SUBSTITUTE A STRING INSIDE OTHER STRING
+	// ft_str_subst(char* original_str, char* string_to_find, char* string_to_insert);
+	write(1, automata->str, automata->str_len);
+	ft_printf("\n len: %d\n", automata->str_len);
+	if (automata->errors != NULL && automata->errors[automata->state] != NULL)
 	{
 		ft_printf("[ERROR] -> %s\n", automata->errors[automata->state]);
 		return ;
 	}
-	get_token_command(automata, ctx);
-	//btree_print(ctx, "0", token_print);
-	// btree_clear(ctx, token_free);
+}
+
+void	abort_automata(t_automata *automata, void *ctx)
+{
+	(void) ctx;
+	automata->str_len = automata->cursor;
 }

@@ -57,12 +57,13 @@ static void automata_evaluate_end(t_automata *automata, void *ctx)
 
 int	automata_evaluate(t_automata *automata, void *automata_ctx, char *str)
 {
-	int	str_len;
-
-	automata->str = ft_strdup(str);// !This dup is not protected, if malloc fails we have segfault
-	str_len = (int) ft_strlen(automata->str);
+	automata->str = ft_strdup(str);  //! Malloc not protected
+	ft_printf("Evaluate string [%s]\n", str);
+	if (automata->str == NULL || (automata->str)[0] == '\0')
+		return (0);
+	automata->str_len = (int) ft_strlen(automata->str);
 	automata_evaluate_start(automata);
-	while (automata->cursor < str_len)
+	while (automata->cursor < automata->str_len)
 		automata_evaluate_char(automata, automata_ctx);
 	automata_evaluate_end(automata, automata_ctx);
 	return (automata->state);

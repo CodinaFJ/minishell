@@ -1,0 +1,22 @@
+@startuml expander automata states
+title
+    expander automata states
+end title
+
+[*] --> EntryState
+EntryState: State initiated when a '$' es found
+EntryState --> SingleCharState : *
+EntryState --> SingleCharState : #
+EntryState --> StringState : char
+
+StringState : State that supports several chars variable
+StringState --> StringState: char
+StringState --> StringState: #
+StringState --> [*]: *
+
+SingleCharState : State only processes one character
+SingleCharState --> [*]: *
+SingleCharState --> [*]: #
+SingleCharState --> [*]: char
+
+@endumld

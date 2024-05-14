@@ -12,8 +12,8 @@
 
 #ifndef AUTOMATA_LEXER_H
 # define AUTOMATA_LEXER_H
-# define ALPHABET_LEN 7
-# define AUTOMATA_STATES 14
+# define ALPHABET_LEXER_LEN 7
+# define AUTOMATA_LEXER_STATES 14
 
 # include "automata.h"
 

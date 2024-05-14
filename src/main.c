@@ -43,7 +43,7 @@ int	main(void)
 	{
 		ft_printf(SHELL_PROMT);
 		str = get_next_line(0);
-		read_command(str, &ctx);
+		read_command(ft_strtrim(str, "\n"), &ctx); //! This creates memory leak for sure
 		if (!assert_input(str))
 		{
 			free(str);

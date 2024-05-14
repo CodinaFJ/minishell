@@ -63,7 +63,9 @@ AUTOMATA_FILES	=	automata_evaluate			\
 					automata_lexer_actions		\
 					automata_lexer_init			\
 					automata_lexer_transitions	\
-					automata_parser_init
+					automata_exp_actions		\
+					automata_exp_init			\
+					automata_exp_transitions
 
 SIGNALS_FILES	=	signals
 

@@ -49,8 +49,8 @@ typedef union u_token_content
 
 typedef struct s_token
 {
-	t_token_id		id;
 	t_token_content	*content;	
+	t_token_id		id;
 }	t_token;
 
 t_token	*token_new(t_token_id id, void *content);

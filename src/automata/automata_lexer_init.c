@@ -14,7 +14,7 @@
 
 void	minishell_alphabet_lexer_init(t_automata *automata)
 {
-	automata->alphabet = ft_calloc(ALPHABET_LEN + 1, sizeof(char *));
+	automata->alphabet = ft_calloc(ALPHABET_LEXER_LEN + 1, sizeof(char *));
 	if (automata->alphabet == NULL)
 		return ;
 	automata->alphabet[0] = NULL;
@@ -29,7 +29,7 @@ void	minishell_alphabet_lexer_init(t_automata *automata)
 
 void	minishell_errors_lexer_init(t_automata	*automata)
 {
-	automata->errors = ft_calloc(AUTOMATA_STATES + 1, sizeof(char *));
+	automata->errors = ft_calloc(AUTOMATA_LEXER_STATES + 1, sizeof(char *));
 	if (automata->errors == NULL)
 		return ;
 	automata->errors[L_EMPTY] = ft_strdup("Empty string");
@@ -81,6 +81,7 @@ t_automata	*automata_lexer_init(void)
 	automata->cursor = 0;
 	automata->cursor_pre = 0;
 	automata->state = 0;
+	automata->str_len = 0;
 	minishell_alphabet_lexer_init(automata);
 	minishell_actions_lexer_init(automata);
 	minishell_errors_lexer_init(automata);
