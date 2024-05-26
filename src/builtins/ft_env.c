@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:19:35 by marubio-          #+#    #+#             */
-/*   Updated: 2024/01/31 20:34:59 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/05/26 20:23:16 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 #include <string.h>
 
 //! lo del  extern char **environ; no se si es legal
-void ft_env(char *args) 
+void ft_env(void *ctx) 
 {
+    char *args;
     extern char **environ;
     char **env = environ;
-
+    
+    args = (char *) ctx;
     ft_printf("env called\n");
     (void) args;
     while (*env != NULL) 

@@ -59,7 +59,8 @@ BUILTINS_FILES	=	builtin			\
 					ft_pwd			\
 					ft_unset	
 
-AUTOMATA_FILES	=	automata_evaluate			\
+AUTOMATA_FILES	=	automata					\
+					automata_evaluate			\
 					automata_lexer_actions		\
 					automata_lexer_init			\
 					automata_lexer_transitions	\
@@ -116,6 +117,9 @@ $(BIN_DIR)%.o:$(SRC_DIR)%.c
 	@mkdir -p $(BIN_DIRS)
 	@echo "$(Y)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -I$(HDR_DIR) -c $< -o $@
+
+debug: CFLAGS += -g3
+debug: all
 
 clean:
 	@$(RM) $(OBJS)

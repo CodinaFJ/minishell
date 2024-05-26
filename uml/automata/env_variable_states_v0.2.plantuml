@@ -1,0 +1,28 @@
+@startuml expander automata states
+title
+    expander automata states
+end title
+
+[*] --> PreDollarState
+PreDollarState: String entry state
+PreDollarState --> PreDollarState : *
+PreDollarState --> PreDollarState : #
+PreDollarState --> PreDollarState : char
+PreDollarState --> InitVariableState : $
+
+InitVariableState: Dollar found, reading variable...
+InitVariableState --> StringState: char
+InitVariableState --> SingleCharState: *
+InitVariableState --> SingleCharState: #
+
+StringState : State that supports several chars variable
+StringState --> StringState: char
+StringState --> StringState: #
+StringState --> [*]: *
+
+SingleCharState : State only processes one character
+SingleCharState --> [*]: *
+SingleCharState --> [*]: #
+SingleCharState --> [*]: char
+
+@endumld

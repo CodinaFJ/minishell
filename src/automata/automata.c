@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   automata.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 14:42:53 by marubio-          #+#    #+#             */
-/*   Updated: 2024/05/26 20:28:13 by jcodina-         ###   ########.fr       */
+/*   Created: 2024/05/26 20:11:46 by jcodina-          #+#    #+#             */
+/*   Updated: 2024/05/26 20:27:51 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+# include "automata.h"
 
-
-void ft_exit(void *ctx)
+void    automata_free(t_automata *automata)
 {
-	t_minishell_ctx	*minish_ctx;
-
-	minish_ctx = (t_minishell_ctx *) ctx;
-	//automata_free(minish_ctx->automata_lexer);
-	//automata_free(minish_ctx->automata_expander);
-	//btree_free(&(minish_ctx->tokens_bt), token_free);
-	exit(0);
-} 
+    if (automata == NULL)
+        return ;
+    if (automata->alphabet != NULL)
+        ft_strs_free(automata->alphabet);
+    if (automata->errors != NULL)
+        ft_strs_free(automata->errors);
+}

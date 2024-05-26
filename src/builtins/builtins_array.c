@@ -21,7 +21,6 @@ t_builtin	**builtins_init()
 	builtins_array = ft_calloc(N_BUILTINS + 1, sizeof(t_builtin *));
 	if (builtins_array == NULL)
 		return (NULL);
-	builtins_array[N_BUILTINS + 1] = NULL;
 	builtins_array[i++] = builtin_new("echo", ft_echo);
 	builtins_array[i++] = builtin_new("env", ft_env);
 	builtins_array[i++] = builtin_new("pwd", ft_pwd);

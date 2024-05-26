@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 16:33:35 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/05/26 20:17:14 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ int	main(void)
 		do_minishell(tokenize(str), ctx.builtins);
 		free(str);
 	}
+	automata_free(ctx.automata_lexer);
+	automata_free(ctx.automata_expander);
 	return (0);
 }

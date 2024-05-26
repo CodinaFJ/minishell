@@ -12,14 +12,14 @@
 
 #ifndef AUTOMATA_EXP_H
 # define AUTOMATA_EXP_H
-# define ALPHABET_EXP_LEN 2
+# define ALPHABET_EXP_LEN 3
 # define AUTOMATA_EXP_STATES 14
 
 # include "automata.h"
 
 typedef enum	e_automata_exp_state
 {
-	E_INIT,
+	E_PRE_DOLLAR,
 	E_SINGLE_CHAR,
 	E_STRING,
 	E_END

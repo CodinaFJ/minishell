@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:51:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/21 20:45:41 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/05/26 20:16:15 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ typedef struct s_automata
 int			automata_evaluate(t_automata *automata, void * automata_ctx,
 				char *str);
 
-
+void    	automata_free(t_automata *automata);
 #endif
