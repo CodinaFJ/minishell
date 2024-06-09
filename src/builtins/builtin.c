@@ -12,7 +12,7 @@
 
 #include "builtin.h"
 
-t_builtin	*builtin_new(char *name, void (*f)(char *args))
+t_builtin	*builtin_new(char *name, void (*f)(void *ctx))
 {
 	t_builtin	*builtin;
 

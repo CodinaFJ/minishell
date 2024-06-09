@@ -55,5 +55,12 @@ dkms.conf
 #VSCode
 .vscode/
 
+# Compiler files
+.clangd
+
+# Cache
+*cache
+.cache/
+
 *.DS_Store
 *compile_commands.json

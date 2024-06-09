@@ -21,7 +21,7 @@ typedef struct s_builtin
 	void	(*f)(void *ctx);
 }	t_builtin;
 
-t_builtin	*builtin_new(char *name, void (*f)(char *args));
+t_builtin	*builtin_new(char *name, void (*f)(void *ctx));
 void		builtin_free(t_builtin *builtin);
 t_builtin	**builtins_init();
 t_bool		try_exec_builtin(t_builtin **builtins_array, char *name, char *args);

@@ -18,6 +18,7 @@ void ft_exit(void *ctx)
 	t_minishell_ctx	*minish_ctx;
 
 	minish_ctx = (t_minishell_ctx *) ctx;
+	(void) minish_ctx;
 	//automata_free(minish_ctx->automata_lexer);
 	//automata_free(minish_ctx->automata_expander);
 	//btree_free(&(minish_ctx->tokens_bt), token_free);

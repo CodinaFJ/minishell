@@ -80,7 +80,7 @@ t_automata	*automata_lexer_init(void)
 		return (NULL);
 	automata->cursor = 0;
 	automata->cursor_pre = 0;
-	automata->state = 0;
+	automata->state = -1;
 	automata->str_len = 0;
 	minishell_alphabet_lexer_init(automata);
 	minishell_actions_lexer_init(automata);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "signals.h"
+#include "../../include/minishell.h"
 
 void	handle_signal_sigint(void)
 {

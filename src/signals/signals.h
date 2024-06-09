@@ -13,7 +13,6 @@
 #ifndef SIGNALS_H
 # define SIGNALS_H
 # include "../../lib/libft/include/libft.h"
-# include "../../include/minishell.h"
 # include <signal.h>
 
 void 	signals_init(void);

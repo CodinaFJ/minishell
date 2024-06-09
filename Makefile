@@ -27,6 +27,7 @@ LEXER_DIR =		lexer/
 AUTOMATA_DIR =	automata/
 BUILTINS_DIR =	builtins/
 SIGNALS_DIR = 	signals/
+TEST_DIR =		test/
 
 BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
 				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))	\
@@ -80,6 +81,16 @@ SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 OBJS	=	$(addprefix $(BIN_DIR), $(addsuffix .o, $(FILES)))
 
 ########################################################################################\
+Sources & objects - TESTING
+########################################################################################
+
+TEST_FILES	=	test			\
+
+TEST_SRCS	=	$(addprefix $(TEST_DIR), $(addsuffix .c, $(TEST_FILES)))
+TEST_OBJS	=	$(addprefix $(BIN_DIR), $(addsuffix .o, $(TEST_FILES)))
+
+
+########################################################################################\
 Colors
 ########################################################################################
 
@@ -113,8 +124,21 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT) $(DATA_STR) -o $@
 	@echo "\n$(G)[MINISHELL] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
 
+bear: $(OBJS)
+	@bear $(CC) $(OBJS) $(LIBFT) $(DATA_STR) -o $@
+	@echo "\n$(G)[MINISHELL] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
+
+test: $(TEST_OBJS)
+	@$(CC) $(TEST_OBJS) $(LIBFT) $(DATA_STR) -o $@
+	@echo "\n$(G)[TEST] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
+
 $(BIN_DIR)%.o:$(SRC_DIR)%.c
 	@mkdir -p $(BIN_DIRS)
+	@echo "$(Y)Compiling: $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -I$(HDR_DIR) -c $< -o $@
+
+$(BIN_DIR)%.o:$(TEST_DIR)%.c
+	@mkdir -p $(BIN_DIR)
 	@echo "$(Y)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -I$(HDR_DIR) -c $< -o $@
 

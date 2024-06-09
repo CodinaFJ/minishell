@@ -20,9 +20,10 @@
 void	end_exp_evaluation(t_automata *automata, void *ctx)
 {
 	//char	*new_str;
-	char	*old_str;
+	//char	*old_str;
 
-	old_str = (char *) ctx;
+	(void) ctx;
+	//old_str = (char *) ctx;
 	// FUNCTION TO SUBSTITUTE A STRING INSIDE OTHER STRING
 	// ft_str_subst(char* original_str, char* string_to_find, char* string_to_insert);
 	write(1, automata->str, automata->str_len);

@@ -54,6 +54,7 @@ void	read_command(char *str, t_minishell_ctx *ctx)
 {
 	int			state;
 
+	(void) state;
 	if (ctx->tokens_bt != NULL)
 		btree_clear(ctx->tokens_bt, token_free);
 	state = automata_evaluate(ctx->automata_lexer, ctx->tokens_bt, str);

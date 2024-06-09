@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "data_structures_C/src/btree/btree.h"
+#include "lexer/token.h"
+#include "libft/include/libft.h"
 
 void	do_minishell(char **tokens, t_builtin **builtins)
 {
@@ -36,6 +39,7 @@ t_bool	assert_input(char *input)
 int	main(void)
 {
 	char 			*str;
+	char 			*str_trim;
 	t_minishell_ctx	ctx;
 	
 	minishell_init(&ctx);
@@ -43,15 +47,18 @@ int	main(void)
 	{
 		ft_printf(SHELL_PROMT);
 		str = get_next_line(0);
-		read_command(ft_strtrim(str, "\n"), &ctx); //! This creates memory leak for sure
-		if (!assert_input(str))
+        str_trim = ft_strtrim(str, "\n");
+        free(str);
+		read_command(str_trim, &ctx);
+		if (!assert_input(str_trim))
 		{
-			free(str);
+			free(str_trim);
 			continue ;
 		}
-		do_minishell(tokenize(str), ctx.builtins);
-		free(str);
+		do_minishell(tokenize(str_trim), ctx.builtins);
+        free(str_trim);
 	}
+    btree_free(&(ctx.tokens_bt), token_free);
 	automata_free(ctx.automata_lexer);
 	automata_free(ctx.automata_expander);
 	return (0);
