@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_evaluate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/21 20:34:37 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:57:48 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ static void automata_evaluate_end(t_automata *automata, void *ctx)
 
 int	automata_evaluate(t_automata *automata, void *automata_ctx, char *str)
 {
-	automata->str = ft_strdup(str);  //! Malloc not protected
-	ft_printf("Evaluate string [%s]\n", str);
+	automata->str = ft_strdup(str);
 	if (automata->str == NULL || (automata->str)[0] == '\0')
 		return (0);
+	ft_printf("Evaluate string [%s]\n", str);
 	automata->str_len = (int) ft_strlen(automata->str);
 	automata_evaluate_start(automata);
 	while (automata->cursor < automata->str_len)

@@ -28,6 +28,7 @@ AUTOMATA_DIR =	automata/
 BUILTINS_DIR =	builtins/
 SIGNALS_DIR = 	signals/
 TEST_DIR =		test/
+ENV_DIR =		environment/
 
 BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
 				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))	\
@@ -69,12 +70,16 @@ AUTOMATA_FILES	=	automata					\
 					automata_exp_init			\
 					automata_exp_transitions
 
+ENV_FILES =		environment			\
+				environment_vars
+
 SIGNALS_FILES	=	signals
 
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
 			$(addprefix $(AUTOMATA_DIR), $(AUTOMATA_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   	\
 			$(addprefix $(SIGNALS_DIR), $(SIGNALS_FILES))  	\
+			$(addprefix $(ENV_DIR), $(ENV_FILES))  	\
 			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))

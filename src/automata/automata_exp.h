@@ -12,16 +12,19 @@
 
 #ifndef AUTOMATA_EXP_H
 # define AUTOMATA_EXP_H
-# define ALPHABET_EXP_LEN 3
-# define AUTOMATA_EXP_STATES 14
+# define ALPHABET_EXP_LEN 6
+# define AUTOMATA_EXP_STATES 7
 
 # include "automata.h"
 
 typedef enum	e_automata_exp_state
 {
-	E_PRE_DOLLAR,
-	E_SINGLE_CHAR,
-	E_STRING,
+	E_PRE_VAR,
+	E_DOLLAR,
+	E_SINGLE_CHAR_VAR,
+	E_STRING_VAR,
+	E_SIMPLE_QUOTE,
+	E_DOUBLE_QUOTE,
 	E_END
 }	t_automata_exp_state;
 
@@ -31,5 +34,9 @@ int			automata_get_state(int i, int j);
 void		end_exp_evaluation(t_automata *automata, void *ctx);
 void		abort_automata(t_automata *automata, void *ctx);
 void		minishell_actions_exp_init(t_automata *automata);
+
+void		remove_dollar();
+void		extract_variable();
+void		single_char_var();;
 
 #endif

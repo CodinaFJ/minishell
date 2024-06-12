@@ -15,8 +15,12 @@ StringState --> StringState: #
 StringState --> [*]: *
 
 SingleCharState : State only processes one character
-SingleCharState --> [*]: *
+SingleCharState --> [*]: *d
 SingleCharState --> [*]: #
 SingleCharState --> [*]: char
 
+@endumld
+
+@startuml
+testdot
 @endumld

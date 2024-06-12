@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/05/26 20:17:14 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:53:35 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ t_bool	assert_input(char *input)
 	return (true);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char 			*str;
 	char 			*str_trim;
 	t_minishell_ctx	ctx;
 	
-	minishell_init(&ctx);
+	(void) argc;
+	(void) argv;
+	minishell_init(&ctx, envp);
 	while (1)
 	{
 		ft_printf(SHELL_PROMT);
@@ -58,6 +60,7 @@ int	main(void)
 		do_minishell(tokenize(str_trim), ctx.builtins);
         free(str_trim);
 	}
+	ft_lstclear(&ctx.env, environment_variable_free);
     btree_free(&(ctx.tokens_bt), token_free);
 	automata_free(ctx.automata_lexer);
 	automata_free(ctx.automata_expander);

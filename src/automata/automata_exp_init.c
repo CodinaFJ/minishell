@@ -22,6 +22,9 @@ void	minishell_alphabet_exp_init(t_automata *automata)
 	ft_strs_add_line("qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_",
 		automata->alphabet);
 	ft_strs_add_line("$", automata->alphabet);
+	ft_strs_add_line("?!", automata->alphabet);
+	ft_strs_add_line("\'", automata->alphabet);
+	ft_strs_add_line("\"", automata->alphabet);
 }
 
 void	minishell_errors_exp_init(t_automata	*automata)
@@ -34,14 +37,15 @@ void	minishell_errors_exp_init(t_automata	*automata)
 int	automata_exp_get_state(int i, int j)
 {
 	const int	state[][8] = {
-	//	  # abc   $   *
-		{ 0,  0,  1 , 0}, // 0 Pre Dollar sign
-		{ 1,  2,  1 , 0}, // 1 Init variable
-		{ 3,  3,  3 , 0}, // 2 Single character state
-		{ 2,  2,  3 , 0}, // 3 String state
-		{ 3,  3,  3 , 0}  // 4 End
+	//	  # abc   $   ?   '   "   *
+		{ 0,  0,  1,  0,  4,  5,  0}, // 0 Pre Variable
+		{ 2,  3,  2,  2,  4,  5,  0}, // 1 Dollar
+		{ 0,  0,  1,  0,  4,  5,  0}, // 2 Single character variable
+		{ 3,  3,  1,  0,  4,  5,  0}, // 3 String variable
+		{ 4,  4,  4,  4,  0,  4,  4}, // 4 Simple quote
+		{ 5,  5,  1,  5,  5,  5,  5}, // 5 Double quote
+		{ 6,  6,  6,  6,  6,  6,  6}  // 6 End
 	};
-	ft_printf("From state %d move to %d\n", i, state[i][j]);
 	return (state[i][j]);
 }
 
