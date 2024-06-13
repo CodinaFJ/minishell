@@ -35,8 +35,8 @@ void		end_exp_evaluation(t_automata *automata, void *ctx);
 void		abort_automata(t_automata *automata, void *ctx);
 void		minishell_actions_exp_init(t_automata *automata);
 
-void		remove_dollar();
-void		extract_variable();
-void		single_char_var();;
+void		remove_dollar(t_automata *automata, void *ctx);
+void		extract_variable(t_automata *automata, void *ctx);
+void		single_char_var(t_automata *automata, void *ctx);
 
 #endif

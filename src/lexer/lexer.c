@@ -14,21 +14,7 @@
 
 void	expand_string(t_automata *automata_expander, void *ctx, char *str)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i] != '\0')
-	{
-		if (str[i] == '\'')
-		{
-			while (str[i] != '\'')
-				i++;
-		}
-		if (str[i] == '$')
-		{
-			automata_evaluate(automata_expander, ctx, str + i + 1);
-		}
-	}
+    automata_evaluate(automata_expander, ctx, str);
 }
 
 void	expand_btree(t_automata *automata_expander, t_btree *btree)
@@ -40,9 +26,9 @@ void	expand_btree(t_automata *automata_expander, t_btree *btree)
 	if (((t_token *)(btree->content))->id == COMMAND)
 	{
 		command = (t_command *) ((t_token_content*)((t_token *)(btree->content))->content);
-		expand_string(automata_expander, command->command, command->command);
+		expand_string(automata_expander, &command->command, command->command);
 		while (command->args[++i] != NULL)
-			expand_string(automata_expander, command->command, command->args[i]);
+			expand_string(automata_expander, &command->args[i], command->args[i]);
 	}
 	if (btree->left != NULL)
 		expand_btree(automata_expander, btree->left);
