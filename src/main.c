@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/12 21:53:35 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/17 18:40:46 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "data_structures_C/src/btree/btree.h"
-#include "lexer/token.h"
-#include "libft/include/libft.h"
 
 void	do_minishell(char **tokens, t_builtin **builtins)
 {
@@ -44,6 +41,11 @@ int	main(int argc, char **argv, char **envp)
 	
 	(void) argc;
 	(void) argv;
+	if (argc == 2 && ft_strcmp(argv[1], "test") == 0)
+	{
+		test_minishell(argc, argv, envp);
+		return (0);
+	}
 	minishell_init(&ctx, envp);
 	while (1)
 	{
@@ -62,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	ft_lstclear(&ctx.env, environment_variable_free);
     btree_free(&(ctx.tokens_bt), token_free);
-	automata_free(ctx.automata_lexer);
-	automata_free(ctx.automata_expander);
+	automata_lexer_free(ctx.automata_lexer);
+	automata_exp_free(ctx.automata_expander);
 	return (0);
 }

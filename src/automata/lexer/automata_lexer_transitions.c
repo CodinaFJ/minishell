@@ -12,7 +12,7 @@
 
 #include "automata_lexer.h"
 
-static void	trans_to_oprtr(t_automata *automata)
+static void	trans_to_oprtr(t_automata_lexer *automata)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ static void	trans_to_oprtr(t_automata *automata)
 	}
 }
 
-static void	trans_from_oprtr(t_automata *automata)
+static void	trans_from_oprtr(t_automata_lexer *automata)
 {
 	int	i;
 
@@ -40,13 +40,13 @@ static void	trans_from_oprtr(t_automata *automata)
 	}
 }
 
-static void trans_to_token_end(t_automata *automata)
+static void trans_to_token_end(t_automata_lexer *automata)
 {
 	automata->state_trans_action[L_WORD][L_TOKEN_END] = get_token_command;
 	automata->state_trans_action[L_TENT_TOKEN_END][L_TOKEN_END] = get_token_command;
 }
 
-void	minishell_actions_lexer_init(t_automata *automata)
+void	minishell_actions_lexer_init(t_automata_lexer *automata)
 {
 	trans_to_oprtr(automata);
 	trans_from_oprtr(automata);

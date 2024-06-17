@@ -1,30 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_types.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/17 18:41:25 by jcodina-         ###   ########.fr       */
+/*   Created: 2024/06/13 22:14:42 by jcodina-          #+#    #+#             */
+/*   Updated: 2024/06/13 22:19:21 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_TYPES_H
+# define MINISHELL_TYPES_H
 # include "../lib/libft/include/libft.h"
 # include "../lib/data_structures_C/include/data_structures.h"
-# include "../src/automata/expander/automata_exp.h"
-# include "../src/automata/lexer/automata_lexer.h"
 # include "../src/builtins/builtin.h"
 # include "../src/signals/signals.h"
 # include "../src/environment/environment.h"
-# define SHELL_PROMT "\033[32;1mBashCrandicoot> \033[0;39m"
-
 
 /* ************************************************************************** */
 /*	Typedefs    															  */
 /* ************************************************************************** */
+
+typedef struct s_automata_exp
+{
+	void	*ctx;
+	char	**alphabet;
+	char	**errors;
+	char	*str;
+	int		prev_state;
+	int		state;
+	int		cursor;
+	int		cursor_pre;
+	int		str_len;
+	void	(*state_enter_action[20])(struct s_automata_exp *a, void *ctx);
+	void	(*state_trans_action[20][20])(struct s_automata_exp *a, void *ctx);
+	char	*(*end_eval_action)(struct s_automata_exp *a, void *ctx);
+	int		(*get_state)(int state, int char_index);
+}	t_automata_exp;
+
+typedef struct s_automata_lexer
+{
+	void	*ctx;
+	char	**alphabet;
+	char	**errors;
+	char	*str;
+	int		prev_state;
+	int		state;
+	int		cursor;
+	int		cursor_pre;
+	int		str_len;
+	void	(*state_enter_action[20])(struct s_automata_lexer *a, void *ctx);
+	void	(*state_trans_action[20][20])(struct s_automata_lexer *a, void *ctx);
+	void	(*end_eval_action)(struct s_automata_lexer *a, void *ctx);
+	int		(*get_state)(int state, int char_index);
+}	t_automata_lexer;
+
+typedef struct s_builtin
+{
+	char	*name;
+	void	(*f)(void *ctx);
+}	t_builtin;
 
 typedef struct s_minishell_ctx
 {
@@ -34,21 +70,5 @@ typedef struct s_minishell_ctx
 	t_btree     		*tokens_bt;
 	t_list      		*env;
 }	t_minishell_ctx;
-
-/* ************************************************************************** */
-/*	Functions    															  */
-/* ************************************************************************** */
-
-
-/*	Minishell   															  */
-
-void	read_command(char *str, t_minishell_ctx *ctx);
-
-/*	Minishell init 															  */
-
-void	automatas_init(t_minishell_ctx *ctx);
-void	minishell_init(t_minishell_ctx *ctx, char **envp);
-
-int		test_minishell(int argc, char **argv, char **envp);
 
 #endif

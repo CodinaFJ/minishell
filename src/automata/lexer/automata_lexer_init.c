@@ -12,7 +12,7 @@
 
 #include "automata_lexer.h"
 
-void	minishell_alphabet_lexer_init(t_automata *automata)
+void	minishell_alphabet_lexer_init(t_automata_lexer *automata)
 {
 	automata->alphabet = ft_calloc(ALPHABET_LEXER_LEN + 1, sizeof(char *));
 	if (automata->alphabet == NULL)
@@ -27,7 +27,7 @@ void	minishell_alphabet_lexer_init(t_automata *automata)
 	ft_strs_add_line(">", automata->alphabet);
 }
 
-void	minishell_errors_lexer_init(t_automata	*automata)
+void	minishell_errors_lexer_init(t_automata_lexer	*automata)
 {
 	automata->errors = ft_calloc(AUTOMATA_LEXER_STATES + 1, sizeof(char *));
 	if (automata->errors == NULL)
@@ -70,12 +70,12 @@ int	automata_get_state(int i, int j)
 	return (state[i][j]);
 }
 
-t_automata	*automata_lexer_init(void)
+t_automata_lexer	*automata_lexer_init(void)
 {
-	t_automata	*automata;
+	t_automata_lexer	*automata;
 	
 	//ft_printf("Automata initialization\n");
-	automata = ft_calloc(1, sizeof(t_automata));
+	automata = ft_calloc(1, sizeof(t_automata_lexer));
 	if (automata == NULL)
 		return (NULL);
 	automata->cursor = 0;

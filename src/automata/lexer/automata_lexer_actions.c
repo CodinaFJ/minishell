@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata.h"
+#include "automata_lexer.h"
 
-void	get_token_command(t_automata *automata, void *ctx)
+void	get_token_command(t_automata_lexer *automata, void *ctx)
 {
 	char			*token;
 
@@ -24,7 +24,7 @@ void	get_token_command(t_automata *automata, void *ctx)
 	free(token);
 }
 
-void	get_token_oprtr(t_automata *automata, void *ctx)
+void	get_token_oprtr(t_automata_lexer *automata, void *ctx)
 {
 	char			*token;
 
@@ -36,7 +36,7 @@ void	get_token_oprtr(t_automata *automata, void *ctx)
 	free(token);
 }
 
-void	end_evaluation(t_automata *automata, void *ctx)
+void	end_evaluation(t_automata_lexer *automata, void *ctx)
 {
 	if (automata->errors[automata->state] != NULL)
 	{

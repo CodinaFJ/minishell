@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "libft/include/ft_printf.h"
 
-void	expand_string(t_automata *automata_expander, void *ctx, char *str)
+char    *expand_string(t_minishell_ctx *ctx, char *str)
 {
-    automata_evaluate(automata_expander, ctx, str);
+    return (automata_exp_evaluate(ctx->automata_expander, ctx, str));
 }
 
-void	expand_btree(t_automata *automata_expander, t_btree *btree)
+void	expand_btree(t_btree *btree, t_minishell_ctx *ctx)
 {
 	int			i;
 	t_command	*command;
@@ -26,14 +27,18 @@ void	expand_btree(t_automata *automata_expander, t_btree *btree)
 	if (((t_token *)(btree->content))->id == COMMAND)
 	{
 		command = (t_command *) ((t_token_content*)((t_token *)(btree->content))->content);
-		expand_string(automata_expander, &command->command, command->command);
+		command->command = expand_string(ctx, command->command);
+        ft_printf("command: %s\n", command->command);
 		while (command->args[++i] != NULL)
-			expand_string(automata_expander, &command->args[i], command->args[i]);
+        {
+			command->args[i] = expand_string(ctx, command->args[i]);
+            ft_printf("arg: %s\n", command->args[i]);
+        } 
 	}
 	if (btree->left != NULL)
-		expand_btree(automata_expander, btree->left);
+		expand_btree(btree->left, ctx);
 	if (btree->right != NULL)
-		expand_btree(automata_expander, btree->right);
+		expand_btree(btree->right, ctx);
 }
 
 void	read_command(char *str, t_minishell_ctx *ctx)
@@ -43,10 +48,10 @@ void	read_command(char *str, t_minishell_ctx *ctx)
 	(void) state;
 	if (ctx->tokens_bt != NULL)
 		btree_clear(ctx->tokens_bt, token_free);
-	state = automata_evaluate(ctx->automata_lexer, ctx->tokens_bt, str);
+	state = automata_lexer_evaluate(ctx->automata_lexer, ctx->tokens_bt, str);
 	btree_print(ctx->tokens_bt, "0", token_print);
 	ctx->automata_expander->ctx = ctx->tokens_bt;
-	expand_btree(ctx->automata_expander, ctx->tokens_bt);
+	expand_btree(ctx->tokens_bt, ctx);
 	// TODO: Error control if automata exits in error state
 	//ft_printf("Automata ended in state: %d\n", state);
 }
@@ -54,5 +59,5 @@ void	read_command(char *str, t_minishell_ctx *ctx)
 void	automatas_init(t_minishell_ctx *ctx)
 {
 	ctx->automata_lexer = automata_lexer_init();
-	ctx->automata_expander = automata_init_exp();
+	ctx->automata_expander = automata_exp_init();
 }

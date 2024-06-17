@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_actions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:24:10 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/13 00:47:41 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:10:25 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "automata_exp.h"
-#include "libft/include/ft_printf.h"
-#include "libft/include/get_next_line.h"
-#include "libft/include/libft.h"
 
 // char	*expand_var_len(char *str, int var_len)
 // {
 
 // }
 
-void	end_exp_evaluation(t_automata *automata, void *ctx)
+void    end_exp_evaluation(t_automata_exp *automata, void *ctx)
 {
 	//char	*new_str;
 	//char	*old_str;
@@ -34,70 +31,73 @@ void	end_exp_evaluation(t_automata *automata, void *ctx)
 	if (automata->errors != NULL && automata->errors[automata->state] != NULL)
 	{
 		ft_printf("[ERROR] -> %s\n", automata->errors[automata->state]);
-		return ;
 	}
 }
 
-void	abort_automata(t_automata *automata, void *ctx)
+void	abort_automata(t_automata_exp *automata, void *ctx)
 {
 	(void) ctx;
 	automata->str_len = automata->cursor;
 }
 
-void		remove_dollar(t_automata *automata, void *ctx)
+void	remove_dollar(t_automata_exp *automata, void *env)
 {
-    char    *str_aux;
-    char    **str_og;
+    char    *str_res;
     int     len;
 
+	(void) env;
     ft_printf("REMOVE_DOLLAR\n");
-    str_og = (char **) ctx;
-    len = ft_strlen(*str_og);
-    str_aux = (char *) ft_calloc(sizeof(char), len - 1);
-    if (str_aux == NULL)
+    len = ft_strlen(automata->str);
+    str_res = (char *) ft_calloc(sizeof(char), len - 1);
+    if (str_res == NULL)
         return ;// TODO: I guess we should error here
-    ft_strncpy(str_aux, *str_og, automata->cursor - 1);
-    ft_strcat(str_aux, *str_og + automata->cursor);
-    free(*str_og);
-    *str_og = str_aux;
-    ft_printf("removed dollar: %s\n", str_aux);
+    ft_strncpy(str_res, automata->str, automata->cursor - 1);
+    ft_strcat(str_res, automata->str + automata->cursor);
+    ft_printf("removed dollar: %s\n", str_res);
+	free(automata->str);
+	automata->str = str_res;
+	automata->cursor--;
 }
 
-void		extract_variable(t_automata *automata, void *ctx)
+void	extract_variable(t_automata_exp *automata, void *env)
 {
-    char    *str_aux;
-    char    **str_og;
+    char    *str_res;
     char    *var_key;
+    char    *var_content;
     int     var_key_len;
     int     i;
 
     ft_printf("EXTRACT_VARIABLE\n");
-    str_og = (char **) ctx;
-    i = automata->cursor;
-    while (--i >= 0)
+    i = automata->cursor - 1;
+    while (i > 0)
     {
-        if ((*str_og)[i] == '$')
+        if (automata->str[i] == '$')
             break ;
+		i--;
     }
     ft_printf("cursor %d i %d\n", automata->cursor, i);
     var_key_len = automata->cursor - i - 1;
     ft_printf("Var key len %d\n", var_key_len);
     var_key = (char *) ft_calloc(sizeof(char), var_key_len + 1);
-    ft_strncpy(var_key, *str_og + i + 1, var_key_len);
+    ft_strncpy(var_key, automata->str + i + 1, var_key_len);
     ft_printf("step 1 %s\n", var_key);
-    str_aux = (char *) ft_calloc(sizeof(char), i);
-    if (str_aux == NULL)
+    str_res = (char *) ft_calloc(sizeof(char), i);
+    if (str_res == NULL)
         return ;// TODO: I guess we should error here
-    ft_strncpy(str_aux, *str_og, i);
-    ft_printf("step 2 %s\n", str_aux);
-    str_aux = ft_strjoin_gnl(str_aux, getenv(var_key));
-    str_aux = ft_strjoin_gnl(str_aux, *str_og + automata->cursor);
-    free(*str_og);
-    *str_og = str_aux;
-    ft_printf("expanded variable %s\n", str_aux);
+    ft_strncpy(str_res, automata->str, i);
+    ft_printf("step 2 %s. var key: %s\n", str_res, var_key);
+	ft_printf("Getenv var content: %s\n", getenv(var_key));
+	var_content =  environment_get(env, var_key);
+	ft_printf("Var content: %s\n", var_content);
+    str_res = ft_strjoin_gnl(str_res, var_content);
+    str_res = ft_strjoin_gnl(str_res, automata->str + automata->cursor);
+    ft_printf("extracted variable: %s\n", str_res);
+	free(automata->str);
+    automata->str = str_res;
+	automata->cursor = automata->cursor - var_key_len + ft_strlen(var_content);
 }
 
-void		single_char_var(t_automata *automata, void *ctx)
+void		single_char_var(t_automata_exp *automata, void *ctx)
 {
     (void) automata;
     (void) ctx;

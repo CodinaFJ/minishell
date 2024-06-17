@@ -22,18 +22,22 @@ HDR_DIR	=	./lib/
 BIN_DIR = 	./bin/
 SRC_DIR	=	./src/
 
-MS_DIR =		./
-LEXER_DIR =		lexer/
-AUTOMATA_DIR =	automata/
-BUILTINS_DIR =	builtins/
-SIGNALS_DIR = 	signals/
-TEST_DIR =		test/
-ENV_DIR =		environment/
+MS_DIR =			./
+LEXER_DIR =			lexer/
+AUTOMATA_EXP_DIR =	automata/expander/
+AUTOMATA_LEX_DIR =	automata/lexer/
+BUILTINS_DIR =		builtins/
+SIGNALS_DIR = 		signals/
+ENV_DIR =			environment/
+TEST_DIR =			test/
 
 BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
 				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))	\
 				$(addprefix $(BIN_DIR), $(SIGNALS_DIR))		\
-				$(addprefix $(BIN_DIR), $(AUTOMATA_DIR))	\
+				$(addprefix $(BIN_DIR), $(ENV_DIR))			\
+				$(addprefix $(BIN_DIR), $(AUTOMATA_EXP_DIR))	\
+				$(addprefix $(BIN_DIR), $(AUTOMATA_LEX_DIR))	\
+				$(addprefix $(BIN_DIR), $(TEST_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
 ########################################################################################\
@@ -61,39 +65,38 @@ BUILTINS_FILES	=	builtin			\
 					ft_pwd			\
 					ft_unset	
 
-AUTOMATA_FILES	=	automata					\
-					automata_evaluate			\
-					automata_lexer_actions		\
-					automata_lexer_init			\
-					automata_lexer_transitions	\
-					automata_exp_actions		\
-					automata_exp_init			\
-					automata_exp_transitions
+AUTOMATA_EXP_FILES	=	automata_exp_evaluate		\
+						automata_exp_actions		\
+						automata_exp_init			\
+						automata_exp_transitions
+
+AUTOMATA_LEX_FILES	=	automata_lexer_evaluate		\
+						automata_lexer_actions		\
+						automata_lexer_init			\
+						automata_lexer_transitions
 
 ENV_FILES =		environment			\
 				environment_vars
 
 SIGNALS_FILES	=	signals
 
+
+TEST_FILES	=	test				\
+				test_automata_exp	\
+				test_environment	\
+				test_automata_lexer
+
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
-			$(addprefix $(AUTOMATA_DIR), $(AUTOMATA_FILES))	\
+			$(addprefix $(AUTOMATA_EXP_DIR), $(AUTOMATA_EXP_FILES))	\
+			$(addprefix $(AUTOMATA_LEX_DIR), $(AUTOMATA_LEX_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   	\
 			$(addprefix $(SIGNALS_DIR), $(SIGNALS_FILES))  	\
 			$(addprefix $(ENV_DIR), $(ENV_FILES))  	\
-			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES))
+			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES)) \
+			$(addprefix $(TEST_DIR), $(TEST_FILES))
 
 SRCS	=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 OBJS	=	$(addprefix $(BIN_DIR), $(addsuffix .o, $(FILES)))
-
-########################################################################################\
-Sources & objects - TESTING
-########################################################################################
-
-TEST_FILES	=	test			\
-
-TEST_SRCS	=	$(addprefix $(TEST_DIR), $(addsuffix .c, $(TEST_FILES)))
-TEST_OBJS	=	$(addprefix $(BIN_DIR), $(addsuffix .o, $(TEST_FILES)))
-
 
 ########################################################################################\
 Colors
@@ -133,16 +136,15 @@ bear: $(OBJS)
 	@bear $(CC) $(OBJS) $(LIBFT) $(DATA_STR) -o $@
 	@echo "\n$(G)[MINISHELL] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
 
-test: $(TEST_OBJS)
-	@$(CC) $(TEST_OBJS) $(LIBFT) $(DATA_STR) -o $@
-	@echo "\n$(G)[TEST] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
+test: $(NAME)
+	@$(NAME) test
 
 $(BIN_DIR)%.o:$(SRC_DIR)%.c
 	@mkdir -p $(BIN_DIRS)
 	@echo "$(Y)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -I$(HDR_DIR) -c $< -o $@
 
-$(BIN_DIR)%.o:$(TEST_DIR)%.c
+$(TEST_DIR)%.o:$(TEST_DIR)%.c
 	@mkdir -p $(BIN_DIR)
 	@echo "$(Y)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -I$(HDR_DIR) -c $< -o $@
