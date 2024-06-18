@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment_vars.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 20:25:08 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/12 21:52:45 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:56:02by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,26 @@
 
 t_env_var	*environment_variable_parse(char *env_str)
 {
-	char		**var_strs;
 	t_env_var	*env_var;
 
-	var_strs = ft_split(env_str, '=');
-	if (var_strs == NULL)
+	if (env_str == NULL || ft_strchr(env_str, '=') == NULL)
 		return (NULL);
 	env_var = (t_env_var *) ft_calloc(1, sizeof(t_env_var));
 	if (!env_var)
 		return (NULL);
-	env_var->key = var_strs[0];
-	env_var->content = var_strs[1];
+	env_var->key = ft_strdup_limit_excluded(env_str, '=');
+	if (env_var->key == NULL)
+	{
+		free(env_var);
+		return(NULL);
+	}
+	env_var->content = ft_strdup(ft_strchr(env_str, '=') + 1);
+	if (env_var->content == NULL)
+	{
+		free(env_var->key);
+		free(env_var);
+		return (NULL);
+	}
 	return (env_var);
 }
 

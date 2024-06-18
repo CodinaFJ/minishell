@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/17 18:40:46 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:27:27 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 2 && ft_strcmp(argv[1], "test") == 0)
 	{
 		test_minishell(argc, argv, envp);
-		return (0);
+		exit(0);
 	}
 	minishell_init(&ctx, envp);
 	while (1)

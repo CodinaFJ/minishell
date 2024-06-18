@@ -136,7 +136,7 @@ bear: $(OBJS)
 	@bear $(CC) $(OBJS) $(LIBFT) $(DATA_STR) -o $@
 	@echo "\n$(G)[MINISHELL] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
 
-test: $(NAME)
+test: debug $(NAME)
 	@$(NAME) test
 
 $(BIN_DIR)%.o:$(SRC_DIR)%.c
@@ -150,6 +150,7 @@ $(TEST_DIR)%.o:$(TEST_DIR)%.c
 	@$(CC) $(CFLAGS) -I$(HDR_DIR) -c $< -o $@
 
 debug: CFLAGS += -g3
+#debug: CFLAGS += -w
 debug: all
 
 clean:

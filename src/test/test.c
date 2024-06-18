@@ -14,7 +14,9 @@
 
 void	print_test_res(char *fun, t_rc rc)
 {
-	ft_printf("%s\t", fun);
+	ft_printf("%s", fun);
+	for (size_t i = 0; i < 6 - (ft_strlen(fun) / 8); i++)
+		ft_printf("\t");
 	if (rc == RC_OK)
 	{
 		ft_printf("%s", GREEN);

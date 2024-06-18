@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:53:32 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/17 20:18:21 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:18:21 jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_list	*environment_create(char **envp)
 	if (envp == NULL)
 		return (NULL);
 	env_list = NULL;
+	env_var_aux = NULL;
 	i = -1;
 	while(envp[++i])
 	{

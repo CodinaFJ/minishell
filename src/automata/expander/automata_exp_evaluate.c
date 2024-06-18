@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/13 22:57:50 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/18 23:03:21 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void    automata_exp_free(t_automata_exp *automata)
     if (automata->alphabet != NULL)
         ft_strs_free(automata->alphabet);
     if (automata->errors != NULL)
-        ft_strs_free(automata->errors);
+	{
+		ft_strs_free(automata->errors);
+	}
+	free(automata);
 }
 
