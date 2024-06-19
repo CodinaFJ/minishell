@@ -44,6 +44,7 @@ int	test_minishell(int argc, char **argv, char **envp)
 	(void) argv;
 	(void) envp;
 	test_automata_exp(envp);
+	test_automata_lexer(envp);
 	test_environment(envp);
 	return (0);
 }
