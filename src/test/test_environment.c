@@ -13,6 +13,50 @@
 #include "test.h"
 
 /**
+ * test_environment_new_variable
+ * 
+ * test creation of new variable given two strings
+ */
+static t_rc	test_environment_new_variable(void *ctx)
+{
+	t_rc	rc = RC_OK;
+	t_env_var *env_var = environment_variable_new("FOO", "bar");
+
+	(void) ctx;
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	environment_variable_free(env_var);
+
+	env_var = environment_variable_new("FOO", NULL);
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("", env_var->content) == 0 ? rc : RC_NOK;
+	environment_variable_free(env_var);
+
+	env_var = environment_variable_new(NULL, "bar");
+	rc = env_var == NULL ? rc : RC_NOK;
+	environment_variable_free(env_var);
+
+	env_var = environment_variable_new(NULL, NULL);
+	rc = env_var == NULL ? rc : RC_NOK;
+	environment_variable_free(env_var);
+
+	env_var = environment_variable_new("", "bar");
+	rc = env_var == NULL ? rc : RC_NOK;
+	environment_variable_free(env_var);
+
+	env_var = environment_variable_new("FOO", "bar");
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	environment_variable_free(env_var);
+	env_var = environment_variable_new("FOO", "");
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("", env_var->content) == 0 ? rc : RC_NOK;
+	environment_variable_free(env_var);
+
+	return (rc);
+}
+
+/**
  * test_wrong_environment_get
  * 
  * test get content from variable of
@@ -36,7 +80,7 @@ static t_rc	test_wrong_environment_get(void *ctx)
 		NULL,
 	};
 	env_list = environment_create(mock_env);
-	rc = ft_lstsize(env_list) == 0 ? rc : RC_NOK;
+	rc = ft_lstsize(env_list) == 1 ? rc : RC_NOK;
 	ft_lstclear(&env_list, environment_variable_free);
 
 	return (rc);
@@ -66,11 +110,11 @@ static t_rc	test_environment_get(void *ctx)
 		return (rc);
 	}
 	t_env_var *env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
-	env_var = (t_env_var *)env_list->next->content;
 	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
 	rc = ft_strcmp("javier", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->content;
+	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
 	
 	char	*var = environment_get(env_list, "HOME");
 	rc = ft_strcmp("/home/", var) == 0 ? rc : RC_NOK;
@@ -87,6 +131,118 @@ static t_rc	test_environment_get(void *ctx)
 	return (rc);
 }
 
+/**
+ * test_environment_set
+ * 
+ * test adding variables to environment.
+ */
+static t_rc	test_environment_set(void *ctx)
+{
+	t_rc	rc = RC_OK;
+	char	*mock_env[] = {
+		"HOME=/home/",
+		"USR=javier",
+		NULL,
+	};
+	t_list	*env_list;
+	char	*var;
+
+	env_list = environment_create(mock_env);
+	(void) ctx;
+	if (env_list == NULL || env_list->content == NULL)
+	{
+		rc = RC_NOK;
+		ft_lstclear(&env_list, environment_variable_free);
+		return (rc);
+	}
+
+	var = environment_get(env_list, "USR");
+	rc = ft_strcmp("javier", var) == 0 ? rc : RC_NOK;
+	free(var);
+
+	environment_set(env_list, "USR", "paco");
+	var = environment_get(env_list, "USR");
+	rc = ft_strcmp("paco", var) == 0 ? rc : RC_NOK;
+	free(var);
+
+	environment_set(env_list, "FOO", "bar");
+	var = environment_get(env_list, "FOO");
+	rc = ft_strcmp("bar", var) == 0 ? rc : RC_NOK;
+	free(var);
+
+	t_env_var *env_var = (t_env_var *)env_list->content;
+	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("paco", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->content;
+	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->next->content;
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+
+	environment_set(env_list, "BAR", "");
+	var = environment_get(env_list, "BAR");
+	rc = ft_strcmp("", var) == 0 ? rc : RC_NOK;
+	free(var);
+
+	ft_lstclear(&env_list, environment_variable_free);
+	return (rc);
+}
+
+/**
+ * test_environment_unset
+ * 
+ * test removing variables from environment.
+ */
+static t_rc	test_environment_unset(void *ctx)
+{
+	t_rc	rc = RC_OK;
+	char	*mock_env[] = {
+		"HOME=/home/",
+		"USR=javier",
+		"FOO=bar",
+		NULL,
+	};
+	t_list	*env_list;
+
+	env_list = environment_create(mock_env);
+	(void) ctx;
+	if (env_list == NULL || env_list->content == NULL)
+	{
+		rc = RC_NOK;
+		ft_lstclear(&env_list, environment_variable_free);
+		return (rc);
+	}
+
+	t_env_var *env_var = (t_env_var *)env_list->content;
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->content;
+	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("javier", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->next->content;
+	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	
+	environment_unset(&env_list, "USR");
+	env_var = (t_env_var *)env_list->content;
+	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->content;
+	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+
+	environment_unset(&env_list, "FOO");
+	env_var = (t_env_var *)env_list->content;
+	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+
+	environment_unset(&env_list, "HOME");
+	rc = ft_lstsize(env_list) == 0 ? rc : RC_NOK;
+
+	ft_lstclear(&env_list, environment_variable_free);
+	return (rc);
+}
 /**
  * test_environment_create
  * 
@@ -111,11 +267,11 @@ static t_rc	test_environment_create(void *ctx)
 		return (rc);
 	}
 	t_env_var *env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
-	env_var = (t_env_var *)env_list->next->content;
 	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
 	rc = ft_strcmp("javier", env_var->content) == 0 ? rc : RC_NOK;
+	env_var = (t_env_var *)env_list->next->content;
+	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
+	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
 	ft_lstclear(&env_list, environment_variable_free);
 	return (rc);
 }
@@ -166,11 +322,14 @@ void	test_environment(void *ctx)
 	ft_printf("\n---------------------------------------------------\n");
 	ft_printf("TEST ENVIRONMENT\n\n");
 	
+	print_test_res("environment_new_variable", test_environment_new_variable(ctx));
 	print_test_res("environment_create", test_environment_create(ctx));
 	print_test_res("environment_null_create", test_environment_null_create(ctx));
 	print_test_res("environment_null_strings_create", test_environment_null_strings_create(ctx));
 	print_test_res("environment_get", test_environment_get(ctx));
 	print_test_res("wrong_environment_get", test_wrong_environment_get(ctx));
+	print_test_res("environment_set", test_environment_set(ctx));
+	print_test_res("environment_unset", test_environment_unset(ctx));
 
 	ft_printf("---------------------------------------------------\n");
 }

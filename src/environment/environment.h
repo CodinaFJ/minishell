@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 19:53:55 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/12 21:52:53 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/19 20:46:38 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_environment_variable
 
 t_env_var	*environment_variable_parse(char *env_str);
 void		environment_variable_print(t_env_var *var);
+t_env_var	*environment_variable_new(char *key, char *content);
+void		environment_set(t_list *env, char *key, char *content);
+void		environment_unset(t_list **env, char *key);
 
 
 /* ************************************************************************** */
