@@ -62,12 +62,12 @@ void        	automata_exp_free(t_automata_exp *automata);
 t_automata_exp	*automata_exp_init(void);
 int 			automata_get_state(int i, int j);
 
-void            end_exp_evaluation(t_automata_exp *automata, void *ctx);
+void            end_exp_evaluation(t_automata_exp *automata, void *env);
 void    		abort_automata(t_automata_exp *automata, void *ctx);
 void    		minishell_actions_exp_init(t_automata_exp *automata);
 
 void    		remove_dollar(t_automata_exp *automata, void *ctx);
-void    		extract_variable(t_automata_exp *automata, void *ctx);
+void    		extract_variable(t_automata_exp *automata, void *env);
 void    		single_char_var(t_automata_exp *automata, void *ctx);
 
 

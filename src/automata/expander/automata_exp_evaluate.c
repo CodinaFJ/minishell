@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/18 23:03:21 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:58:46y jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,16 @@ static void automata_evaluate_char(t_automata_exp *automata, void *env)
 static void	automata_evaluate_end(t_automata_exp *automata, void *env)
 {
     automata->end_eval_action(automata, env);
-	if (automata->str != NULL)
-	{
-		free(automata->str);
-		automata->str = NULL;
-	}
 }
-
 
 char    *automata_exp_evaluate(t_automata_exp *automata, void *env, char *str)
 {
 	automata->str = ft_strdup(str);
-	if (automata->str == NULL || (automata->str)[0] == '\0')
-		return (0);
-	ft_printf("Evaluate string [%s]\n", str);
+	if (automata->str == NULL)
+		return (NULL);
+	else if ((automata->str)[0] == '\0')
+		return (automata->str);
+	// ft_printf("Evaluate string [%s]\n", automata->str);
 	automata->str_len = (int) ft_strlen(automata->str);
 	automata_evaluate_start(automata);
 	while (automata->cursor < automata->str_len)

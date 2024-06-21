@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   automata_evaluate.c                                :+:      :+:    :+:   */
+/*   automata_lexer_evaluate.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/12 21:57:48 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/21 12:30:43 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,23 @@ int	automata_lexer_evaluate(t_automata_lexer *automata, void *automata_ctx, char
 
 void    automata_lexer_free(t_automata_lexer *automata)
 {
+	unsigned int	i;
+
+	i = -1;
     if (automata == NULL)
         return ;
     if (automata->alphabet != NULL)
         ft_strs_free(automata->alphabet);
     if (automata->errors != NULL)
-        ft_strs_free(automata->errors);
+	{
+		while (++i <= AUTOMATA_LEXER_STATES)
+		{
+			if (automata->errors[i] == NULL)
+				continue ;
+			free(automata->errors[i]);
+		}
+		free(automata->errors);
+	}
+	free(automata);
 }
 

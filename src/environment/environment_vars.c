@@ -52,7 +52,10 @@ t_env_var	*environment_variable_new(char *key, char *content)
 		free(env_var);
 		return (NULL);
 	}
-	env_var->content = ft_strdup(content);
+	if (content == NULL)
+		env_var->content = ft_strdup("");
+	else
+		env_var->content = ft_strdup(content);
 	if (env_var->content == NULL)
 	{
 		free(env_var->key);
