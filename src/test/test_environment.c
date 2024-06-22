@@ -23,13 +23,13 @@ static t_rc	test_environment_new_variable(void *ctx)
 	t_env_var *env_var = environment_variable_new("FOO", "bar");
 
 	(void) ctx;
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	rc = assert_str("FOO", env_var->key);
+	rc = assert_str("bar", env_var->content);
 	environment_variable_free(env_var);
 
 	env_var = environment_variable_new("FOO", NULL);
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("", env_var->content) == 0 ? rc : RC_NOK;
+	rc = assert_str(env_var->key,"FOO");
+	rc = assert_str(env_var->content,"");
 	environment_variable_free(env_var);
 
 	env_var = environment_variable_new(NULL, "bar");
@@ -45,12 +45,12 @@ static t_rc	test_environment_new_variable(void *ctx)
 	environment_variable_free(env_var);
 
 	env_var = environment_variable_new("FOO", "bar");
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	rc = assert_str(env_var->key,"FOO");
+	rc = assert_str(env_var->content,"bar");
 	environment_variable_free(env_var);
 	env_var = environment_variable_new("FOO", "");
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("", env_var->content) == 0 ? rc : RC_NOK;
+	rc = assert_str(env_var->key,"FOO");
+	rc = assert_str(env_var->content,"");
 	environment_variable_free(env_var);
 
 	return (rc);
@@ -110,18 +110,18 @@ static t_rc	test_environment_get(void *ctx)
 		return (rc);
 	}
 	t_env_var *env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("javier", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"USR");
+	rc =assert_str(env_var->content,"javier");
 	env_var = (t_env_var *)env_list->next->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"HOME");
+	rc =assert_str(env_var->content,"/home/");
 	
 	char	*var = environment_get(env_list, "HOME");
-	rc = ft_strcmp("/home/", var) == 0 ? rc : RC_NOK;
+	rc =assert_str(var,"/home/");
 	free(var);
 
 	var = environment_get(env_list, "USR");
-	rc = ft_strcmp("javier", var) == 0 ? rc : RC_NOK;
+	rc =assert_str(var,"javier");
 	free(var);
 
 	var = environment_get(env_list, "FAKE");
@@ -157,32 +157,32 @@ static t_rc	test_environment_set(void *ctx)
 	}
 
 	var = environment_get(env_list, "USR");
-	rc = ft_strcmp("javier", var) == 0 ? rc : RC_NOK;
+	rc =assert_str(var,"javier");
 	free(var);
 
 	environment_set(env_list, "USR", "paco");
 	var = environment_get(env_list, "USR");
-	rc = ft_strcmp("paco", var) == 0 ? rc : RC_NOK;
+	rc =assert_str(var,"paco");
 	free(var);
 
 	environment_set(env_list, "FOO", "bar");
 	var = environment_get(env_list, "FOO");
-	rc = ft_strcmp("bar", var) == 0 ? rc : RC_NOK;
+	rc =assert_str(var,"bar");
 	free(var);
 
 	t_env_var *env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("paco", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"USR");
+	rc =assert_str(env_var->content,"paco");
 	env_var = (t_env_var *)env_list->next->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"HOME");
+	rc =assert_str(env_var->content,"/home/");
 	env_var = (t_env_var *)env_list->next->next->content;
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"FOO");
+	rc =assert_str(env_var->content,"bar");
 
 	environment_set(env_list, "BAR", "");
 	var = environment_get(env_list, "BAR");
-	rc = ft_strcmp("", var) == 0 ? rc : RC_NOK;
+	rc =assert_str(var,"");
 	free(var);
 
 	ft_lstclear(&env_list, environment_variable_free);
@@ -215,27 +215,27 @@ static t_rc	test_environment_unset(void *ctx)
 	}
 
 	t_env_var *env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"FOO");
+	rc =assert_str(env_var->content,"bar");
 	env_var = (t_env_var *)env_list->next->content;
-	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("javier", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"USR");
+	rc =assert_str(env_var->content,"javier");
 	env_var = (t_env_var *)env_list->next->next->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"HOME");
+	rc =assert_str(env_var->content,"/home/");
 	
 	environment_unset(&env_list, "USR");
 	env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("FOO", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("bar", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"FOO");
+	rc =assert_str(env_var->content,"bar");
 	env_var = (t_env_var *)env_list->next->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"HOME");
+	rc =assert_str(env_var->content,"/home/");
 
 	environment_unset(&env_list, "FOO");
 	env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"HOME");
+	rc =assert_str(env_var->content,"/home/");
 
 	environment_unset(&env_list, "HOME");
 	rc = ft_lstsize(env_list) == 0 ? rc : RC_NOK;
@@ -267,11 +267,11 @@ static t_rc	test_environment_create(void *ctx)
 		return (rc);
 	}
 	t_env_var *env_var = (t_env_var *)env_list->content;
-	rc = ft_strcmp("USR", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("javier", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"USR");
+	rc =assert_str(env_var->content,"javier");
 	env_var = (t_env_var *)env_list->next->content;
-	rc = ft_strcmp("HOME", env_var->key) == 0 ? rc : RC_NOK;
-	rc = ft_strcmp("/home/", env_var->content) == 0 ? rc : RC_NOK;
+	rc =assert_str(env_var->key,"HOME");
+	rc =assert_str(env_var->content,"/home/");
 	ft_lstclear(&env_list, environment_variable_free);
 	return (rc);
 }

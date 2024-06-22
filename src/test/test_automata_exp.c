@@ -46,7 +46,7 @@ t_rc	test_automata_exp_null_parses(void *ctx)
 	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx, "");
-	rc = ft_strcmp(str_res, "") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx, NULL);
@@ -66,24 +66,23 @@ t_rc	test_automata_exp_empty_vars(void *ctx)
 	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$\"bar\"");
-	rc = ft_strcmp(str_res, "foo\"bar\"") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "foo\"bar\"");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$bar");
-	rc = ft_strcmp(str_res, "foo") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "foo");
 	free(str_res);
-
 	
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$b\"ar\"");
-	rc = ft_strcmp(str_res, "foo\"ar\"") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "foo\"ar\"");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "$foobar");
-	rc = ft_strcmp(str_res, "") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$b$bar");
-	rc = ft_strcmp(str_res, "foo") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "foo");
 	free(str_res);
 	return(rc);
 }
@@ -100,16 +99,53 @@ t_rc	test_automata_exp_real_vars(void *ctx)
 	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "$HOME");
-	rc = ft_strcmp(str_res, "/home/") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "/home/");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "$USR");
-	rc = ft_strcmp(str_res, "javier") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "javier");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "hola $USR esta en $HOME");
-	ft_printf("str res %s \n", str_res);
-	rc = ft_strcmp(str_res, "hola javier esta en /home/") == 0 ? rc : RC_NOK;
+	rc = assert_str(str_res, "hola javier esta en /home/");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "$USR$HOME");
+	rc = assert_str(str_res, "javier/home/");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "a$USER$HOME");
+	rc = assert_str(str_res, "a/home/");
+	free(str_res);
+
+	return(rc);
+}
+
+/**
+ * test_automata_exp_quotes
+ * 
+ * test real variables and quotes
+ */
+t_rc	test_automata_exp_quotes(void *ctx)
+{
+	t_rc			rc = RC_OK;
+	char			*str_res;
+	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\"$HOME\"");
+	rc = assert_str(str_res, "\"/home/\"");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\'$HOME\'");
+	rc = assert_str(str_res, "\'$HOME\'");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\'\"$HOME\"\'");
+	rc = assert_str(str_res, "\'\"$HOME\"\'");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\"\'$HOME\'\"");
+	rc = assert_str(str_res, "\"\'/home/\'\"");
 	free(str_res);
 
 	return(rc);
@@ -121,6 +157,8 @@ void	test_automata_exp(void *envp)
 	char	*mock_env[] = {
 		"HOME=/home/",
 		"USR=javier",
+		"DOLLAR=$",
+		"DOLLARUSR=$USR",
 		NULL,
 	};
 
@@ -133,6 +171,7 @@ void	test_automata_exp(void *envp)
 	print_test_res("test_automata_exp_null_parses", test_automata_exp_null_parses(&ctx));
 	print_test_res("test_automata_exp_empty_vars", test_automata_exp_empty_vars(&ctx));
 	print_test_res("test_automata_exp_real_vars", test_automata_exp_real_vars(&ctx));
+	print_test_res("test_automata_exp_quotes", test_automata_exp_quotes(&ctx));
 
 	ft_lstclear(&ctx.env, environment_variable_free);
 	automata_exp_free(ctx.automata_expander);

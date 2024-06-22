@@ -33,5 +33,8 @@ void	test_automata_lexer(void *ctx);
 void	test_environment(void *ctx);
 void	print_test_res(char *fun, t_rc rc);
 
+t_rc	assert_str(char *result, char *reference);
+t_rc	assert_int(int result, int reference);
+t_rc	assert(t_bool expresion);
 
 #endif // !TEST_H

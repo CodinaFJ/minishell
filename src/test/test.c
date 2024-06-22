@@ -38,6 +38,36 @@ void	print_test_res(char *fun, t_rc rc)
 	ft_printf("%s\n", RESET);
 }
 
+t_rc	assert_str(char *result, char *reference)
+{
+	t_rc	rc = RC_OK;
+	
+	rc = ft_strcmp(result, reference) == 0 ? rc : RC_NOK;
+	if (rc == RC_NOK)
+		ft_printf("\nExpected:\t%s\nResult:\t\t%s\n\n", reference, result);
+	return (rc);
+}
+
+t_rc	assert_int(int result, int reference)
+{
+	t_rc	rc = RC_OK;
+	
+	rc = result == reference ? rc : RC_NOK;
+	if (rc == RC_NOK)
+		ft_printf("Expected:\t%d\nResult:\t%d\n", reference, result);
+	return (rc);
+}
+
+t_rc	assert(t_bool expresion)
+{
+	t_rc	rc = RC_OK;
+	
+	rc = expresion == true? rc : RC_NOK;
+	if (rc == RC_NOK)
+		ft_printf("Expected:\ttrue\nResult:\tfalse\n");
+	return (rc);
+}
+
 int	test_minishell(int argc, char **argv, char **envp)
 {
 	(void) argc;
