@@ -66,7 +66,7 @@ t_rc	test_automata_exp_empty_vars(void *ctx)
 	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$\"bar\"");
-	rc = assert_str(str_res, "foo\"bar\"");
+	rc = assert_str(str_res, "foobar");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$bar");
@@ -74,7 +74,7 @@ t_rc	test_automata_exp_empty_vars(void *ctx)
 	free(str_res);
 	
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$b\"ar\"");
-	rc = assert_str(str_res, "foo\"ar\"");
+	rc = assert_str(str_res, "fooar");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "$foobar");
@@ -133,21 +133,53 @@ t_rc	test_automata_exp_quotes(void *ctx)
 	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\"$HOME\"");
-	rc = assert_str(str_res, "\"/home/\"");
+	rc = assert_str(str_res, "/home/");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\'$HOME\'");
-	rc = assert_str(str_res, "\'$HOME\'");
+	rc = assert_str(str_res, "$HOME");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\'\"$HOME\"\'");
-	rc = assert_str(str_res, "\'\"$HOME\"\'");
+	rc = assert_str(str_res, "\"$HOME\"");
 	free(str_res);
 
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "\"\'$HOME\'\"");
-	rc = assert_str(str_res, "\"\'/home/\'\"");
+	rc = assert_str(str_res, "\'/home/\'");
 	free(str_res);
 
+	return(rc);
+}
+
+/**
+ * test_automata_exp_one_char_vars
+ * 
+ * test vars numbers or symbols
+ */
+t_rc	test_automata_exp_one_char_vars(void *ctx)
+{
+	t_rc			rc = RC_OK;
+	char			*str_res;
+	char			*str_aux;
+	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$1bar");
+	rc = assert_str(str_res, "foobar");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$1$USR");
+	rc = assert_str(str_res, "foojavier");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "foo$12$USR");
+	rc = assert_str(str_res, "foo2javier");
+	free(str_res);
+
+	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx->env, "$$");
+	str_aux = ft_itoa(getpid());
+	rc = assert_str(str_res, str_aux);
+	free(str_aux);
+	free(str_res);
 	return(rc);
 }
 
@@ -172,6 +204,7 @@ void	test_automata_exp(void *envp)
 	print_test_res("test_automata_exp_empty_vars", test_automata_exp_empty_vars(&ctx));
 	print_test_res("test_automata_exp_real_vars", test_automata_exp_real_vars(&ctx));
 	print_test_res("test_automata_exp_quotes", test_automata_exp_quotes(&ctx));
+	print_test_res("test_automata_exp_one_char_vars", test_automata_exp_one_char_vars(&ctx));
 
 	ft_lstclear(&ctx.env, environment_variable_free);
 	automata_exp_free(ctx.automata_expander);

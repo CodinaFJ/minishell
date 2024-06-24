@@ -68,6 +68,7 @@ BUILTINS_FILES	=	builtin			\
 AUTOMATA_EXP_FILES	=	automata_exp_evaluate		\
 						automata_exp_actions		\
 						automata_exp_init			\
+						automata_exp_utils			\
 						automata_exp_transitions
 
 AUTOMATA_LEX_FILES	=	automata_lexer_evaluate		\

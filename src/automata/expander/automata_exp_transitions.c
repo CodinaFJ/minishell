@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:08:33 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/21 14:10:29 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:29:47 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void enter_dollar(t_automata_exp *automata, void *ctx)
 {
     (void) automata;
     (void) ctx;
-    // ft_printf("ENTER DOLLAR\n");
 }
 
 static void	enter_state_actions(t_automata_exp *automata)

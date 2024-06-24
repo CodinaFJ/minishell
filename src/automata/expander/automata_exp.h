@@ -72,5 +72,6 @@ void    		single_char_var(t_automata_exp *automata, void *ctx);
 
 
 void            automata_exp_free(t_automata_exp *automata);
+void			automata_exp_resume(t_automata_exp *automata, char *str_res);
 
 #endif

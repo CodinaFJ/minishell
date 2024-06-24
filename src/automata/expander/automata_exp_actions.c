@@ -12,22 +12,56 @@
 
 #include "automata_exp.h"
 
-void	remove_quoting(t_automata_exp *automata)
+char	*ft_str_rmv_index(char *str, const unsigned int index)
 {
-	unsigned int	i;
+	unsigned int	i;	
+	unsigned int	j;	
+	char			*new_str;
 
 	i = -1;
-	while(automata->str[++i])
+	j = -1;
+	new_str = ft_calloc(1, ft_strlen(str));
+	if (new_str == NULL)
+		return (NULL);
+	while (str[++i])
 	{
-		if(automata->str[i] == '\'')
-		
+		if (i == index)
+			continue;
+		new_str[++j] = str[i];
 	}
+	new_str[++j] = 0;
+	free(str);
+	return (new_str);
+}
+
+char	*remove_quoting(char *str)
+{
+	unsigned int	i;
+	unsigned int 	j;
+	char			c;
+
+	i = -1;
+	while(str[++i])
+	{
+		c = str[i];
+		if(c == '\'' || c == '\"')
+		{
+			j = i;
+			while (str[++i] != c)
+				;
+			str = ft_str_rmv_index(str, i);
+			str = ft_str_rmv_index(str, j);
+			i--;
+		}
+	}
+	return (str);
 }
 
 void    end_exp_evaluation(t_automata_exp *automata, void *env)
 {
 	if (automata->state == E_STRING_VAR)
 		extract_variable(automata, env);
+	automata->str = remove_quoting(automata->str);
 	if (automata->errors != NULL && automata->errors[automata->state] != NULL)
 	{
 		ft_printf("[ERROR] -> %s\n", automata->errors[automata->state]);
@@ -100,25 +134,39 @@ void	extract_variable(t_automata_exp *automata, void *env)
 	var_content =  environment_get(env, var_key);
     str_res = ft_strjoin_free(str_res, var_content, 1);
     str_res = ft_strjoin_free(str_res, automata->str + automata->cursor, 1);
-	free(automata->str);
-    automata->str = str_res;
 	automata->cursor = automata->cursor - (ft_strlen(var_key) + 1) + ft_strlen(var_content);
-	automata->str_len = ft_strlen(automata->str);
-	automata->state = E_PRE_VAR;
-	if (automata->str[automata->cursor] == '$')
-		automata->state = E_DOLLAR;
+	automata_exp_resume(automata, str_res);
 	free(var_key);
 	if (var_content)
 		free(var_content);
 }
 
-void		single_char_var(t_automata_exp *automata, void *ctx)
+void		single_char_var(t_automata_exp *automata, void *env)
 {
-    (void) automata;
-    (void) ctx;
-	// Extract one char variable retroactively, search reverse the dollar and 
-	// look for the variable. Here are special cases like $$ or $?, and
-	// also $[number] -> this case should just be trated as a variable that
-	// is not found.
-	// Maybe this whole function could be done in the extract variable function
+	char    *str_res;
+	char    var_key;
+	char	*str_aux;
+	int     i;
+
+	(void) env;
+	i = automata->cursor - 1;
+	var_key = automata->str[automata->cursor];
+	str_res = ft_calloc(1, i + 1);
+	str_aux = NULL;
+	if (str_res == NULL)
+		return ;
+	ft_strncpy(str_res, automata->str, i);
+	if (var_key == '$')
+	{
+		str_aux = ft_itoa(getpid());
+		if (str_aux == NULL)
+		{
+			free(str_res);
+			return ;
+		}
+		str_res = ft_strjoin_free(str_res, str_aux, 3);
+	}
+	str_res = ft_strjoin_free(str_res, automata->str + automata->cursor + 1, 1);
+	automata->cursor = automata->cursor - 2 + ft_strlen(str_aux);
+	automata_exp_resume(automata, str_res);
 }
