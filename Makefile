@@ -7,6 +7,7 @@ NAME = $(BIN_DIR)minishell
 
 CC	= cc
 CFLAGS = -Wall -Wextra -Werror
+FLAGS = -lreadline
 LIBFT_PATH = ./lib/libft/bin/
 DATA_STR_PATH = ./lib/data_structures_C/bin/
 LIBFT = $(LIBFT_PATH)libft.a
@@ -24,6 +25,7 @@ SRC_DIR	=	./src/
 
 MS_DIR =			./
 LEXER_DIR =			lexer/
+INTERPRETER_DIR =	interpreter/
 AUTOMATA_EXP_DIR =	automata/expander/
 AUTOMATA_LEX_DIR =	automata/lexer/
 BUILTINS_DIR =		builtins/
@@ -38,6 +40,7 @@ BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
 				$(addprefix $(BIN_DIR), $(AUTOMATA_EXP_DIR))	\
 				$(addprefix $(BIN_DIR), $(AUTOMATA_LEX_DIR))	\
 				$(addprefix $(BIN_DIR), $(TEST_DIR))	\
+				$(addprefix $(BIN_DIR), $(INTERPRETER_DIR))	\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
 ########################################################################################\
@@ -47,13 +50,15 @@ Sources & objects
 MS_FILES	=	main			\
 				minishell_init	\
 
-LEXER_FILES	=	lexer			\
-				token			\
+LEXER_FILES	=	token			\
 				token_args		\
 				operator		\
 				command			\
 				command_args	\
 				token_btree
+
+INTERPRETER_FILES	=	interpreter			\
+						interpreter_expand
 
 BUILTINS_FILES	=	builtin			\
 					builtins_array	\
@@ -91,6 +96,7 @@ FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
 			$(addprefix $(AUTOMATA_EXP_DIR), $(AUTOMATA_EXP_FILES))	\
 			$(addprefix $(AUTOMATA_LEX_DIR), $(AUTOMATA_LEX_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   	\
+			$(addprefix $(INTERPRETER_DIR), $(INTERPRETER_FILES))   	\
 			$(addprefix $(SIGNALS_DIR), $(SIGNALS_FILES))  	\
 			$(addprefix $(ENV_DIR), $(ENV_FILES))  	\
 			$(addprefix $(BUILTINS_DIR), $(BUILTINS_FILES)) \
@@ -130,12 +136,14 @@ $(DATA_STR):
 	@make -C $(DATA_STR_PATH)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT) $(DATA_STR) -o $@
+	@$(CC) $(OBJS) $(LIBFT) $(DATA_STR) $(FLAGS) -o $@
 	@echo "\n$(G)[MINISHELL] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
 
-bear: $(OBJS)
-	@bear $(CC) $(OBJS) $(LIBFT) $(DATA_STR) -o $@
-	@echo "\n$(G)[MINISHELL] Compilation finished!$(DEF_COLOR)-> $(NAME)\n"
+bear:
+	@bear -- make
+
+run:
+	$(NAME)
 
 test: debug $(NAME)
 	@$(NAME) test
@@ -174,8 +182,5 @@ re: fclean all
 
 norminette:
 	norminette $(SRC_DIR)
-
-run:
-	@$(NAME) && ([ $$? -eq 0 ] && echo "") || echo "" 		
 
 .PHONY: all clean fclean re norminette

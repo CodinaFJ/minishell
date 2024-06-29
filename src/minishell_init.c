@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:42:08 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/12 21:49:37 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/29 12:48:06 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+static void	automatas_init(t_minishell_ctx *ctx)
+{
+	ctx->automata_lexer = automata_lexer_init();
+	ctx->automata_expander = automata_exp_init();
+}
 
 void	minishell_init(t_minishell_ctx *ctx, char **envp)
 {

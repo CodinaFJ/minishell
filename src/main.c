@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/18 17:27:27 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/06/29 12:47:50 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ t_bool	assert_input(char *input)
 	return (true);
 }
 
+
 int	main(int argc, char **argv, char **envp)
 {
-	char 			*str;
-	char 			*str_trim;
 	t_minishell_ctx	ctx;
+	t_rc			rc;
 	
-	(void) argc;
-	(void) argv;
 	if (argc == 2 && ft_strcmp(argv[1], "test") == 0)
 	{
 		test_minishell(argc, argv, envp);
@@ -49,18 +47,11 @@ int	main(int argc, char **argv, char **envp)
 	minishell_init(&ctx, envp);
 	while (1)
 	{
-		ft_printf(SHELL_PROMT);
-		str = get_next_line(0);
-        str_trim = ft_strtrim(str, "\n");
-        free(str);
-		read_command(str_trim, &ctx);
-		if (!assert_input(str_trim))
-		{
-			free(str_trim);
+		rc = interpreter_get_input(&ctx);
+		if (rc == RC_NOK)
 			continue ;
-		}
-		do_minishell(tokenize(str_trim), ctx.builtins);
-        free(str_trim);
+		do_minishell(tokenize(ctx.input_str), ctx.builtins);
+        free(ctx.input_str);
 	}
 	ft_lstclear(&ctx.env, environment_variable_free);
     btree_free(&(ctx.tokens_bt), token_free);
