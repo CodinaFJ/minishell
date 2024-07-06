@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:50:34 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/02 20:59:46 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:54:29 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_command	*command_new(char *command, int args)
 	_command = ft_calloc(1, sizeof(t_command));
 	if (_command == NULL)
 		return (NULL);
-	_command->command = ft_strtrim(command, "\"");
+	_command->command = ft_strdup(command);
 	_command->args = ft_calloc(args, sizeof(char *));
 	if (_command->args == NULL)
 	{

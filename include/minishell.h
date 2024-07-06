@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/29 12:47:35 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:48:57 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	minishell_init(t_minishell_ctx *ctx, char **envp);
 
 /*	Interpreter 															  */
 
-t_rc	interpreter_get_input(t_minishell_ctx *ctx);
+t_rc	interpreter_get_line(t_minishell_ctx *ctx);
 
 /*	Test 															  */
 

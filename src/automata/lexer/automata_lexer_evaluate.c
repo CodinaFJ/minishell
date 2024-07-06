@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/21 12:30:43 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:35:27 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	automata_lexer_evaluate(t_automata_lexer *automata, void *automata_ctx, char
 	automata->str = ft_strdup(str);
 	if (automata->str == NULL || (automata->str)[0] == '\0')
 		return (0);
-	ft_printf("Evaluate string [%s]\n", str);
+	// ft_printf("Evaluate string [%s]\n", str);
 	automata->str_len = (int) ft_strlen(automata->str);
 	automata_evaluate_start(automata);
 	while (automata->cursor < automata->str_len)

@@ -61,7 +61,7 @@ void    end_exp_evaluation(t_automata_exp *automata, void *env)
 {
 	if (automata->state == E_STRING_VAR)
 		extract_variable(automata, env);
-	automata->str = remove_quoting(automata->str);
+	// automata->str = remove_quoting(automata->str);
 	if (automata->errors != NULL && automata->errors[automata->state] != NULL)
 	{
 		ft_printf("[ERROR] -> %s\n", automata->errors[automata->state]);

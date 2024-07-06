@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/29 12:47:50 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/06 20:48:57 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	minishell_init(&ctx, envp);
 	while (1)
 	{
-		rc = interpreter_get_input(&ctx);
+		rc = interpreter_get_line(&ctx);
 		if (rc == RC_NOK)
 			continue ;
 		do_minishell(tokenize(ctx.input_str), ctx.builtins);
