@@ -1,5 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   interpreter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -17,27 +15,30 @@ static t_rc	split_parameters(t_token *token)
 	const t_command		*command = (t_command *) token->content;
 	char				*str_aux;
 	char				quote;
+	unsigned int		prev_i;
 	unsigned int		i;
 	
 	i = 0;
+	prev_i = 0;
 	str_aux = command->command;
 	while (command->command[i])
 	{
 		if (command->command[i] == ' ')
 		{
-			ft_strs_add_line(ft_strdup_limit(str_aux, ' '), command->args);
-			str_aux = command->command + i + 1;
+			ft_strs_add_line(ft_substr(str_aux, prev_i, i), command->args);
+			prev_i = i + 1;
 		}
 		else if (command->command[i] == '\'' || command->command[i] == '\"')
 		{
 			quote = command->command[i];
 			while (command->command[i] != quote)
 				i++;
+			i++;
 			continue ;
 		}
 		i++;
 	}
-	// ft_strs_add_line(ft_strdup(str_aux), command->args);
+	ft_strs_add_line(ft_substr(str_aux, prev_i, i), command->args);
 	return (RC_OK);
 }
 
