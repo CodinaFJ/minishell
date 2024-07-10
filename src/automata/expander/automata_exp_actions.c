@@ -125,7 +125,9 @@ void	extract_variable(t_automata_exp *automata, void *env)
     int     i;
 
 	i = strr_find_dollar(automata);
+	ft_printf("Dollar is at %d\n", i);
 	var_key = get_var_key(automata, i); //TODO Protect this malloc
+	ft_printf("Key is %s\n", var_key);
     str_res = (char *) ft_calloc(sizeof(char), i + 1);
     if (str_res == NULL)
         return ;// TODO: I guess we should error here

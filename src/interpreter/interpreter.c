@@ -18,27 +18,31 @@ static t_rc	split_parameters(t_token *token)
 	unsigned int		prev_i;
 	unsigned int		i;
 	
-	i = 0;
+	i = -1;
 	prev_i = 0;
-	str_aux = command->command;
-	while (command->command[i])
+	while (command->command[++i])
 	{
 		if (command->command[i] == ' ')
 		{
-			ft_strs_add_line(ft_substr(str_aux, prev_i, i), command->args);
-			prev_i = i + 1;
+			str_aux = ft_substr(command->command, prev_i, i - prev_i);
+			str_aux = ft_strtrim(str_aux, " ");
+			ft_strs_add_line(str_aux, command->args);
+			free(str_aux);
+			prev_i = i;
+			while (command->command[++i] == ' ')
+				;
 		}
 		else if (command->command[i] == '\'' || command->command[i] == '\"')
 		{
 			quote = command->command[i];
-			while (command->command[i] != quote)
-				i++;
-			i++;
-			continue ;
+			while (command->command[++i] != quote)
+				;
 		}
-		i++;
 	}
-	ft_strs_add_line(ft_substr(str_aux, prev_i, i), command->args);
+	str_aux = ft_substr(command->command, prev_i, i - prev_i);
+	str_aux = ft_strtrim(str_aux, " ");
+	ft_strs_add_line(str_aux, command->args);
+	free(str_aux);
 	return (RC_OK);
 }
 

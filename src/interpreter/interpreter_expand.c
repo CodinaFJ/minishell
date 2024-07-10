@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreter_expand.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 12:30:38 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/29 12:35:37 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:28:49 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*expand_string(t_minishell_ctx *ctx, char *str)
 {
-    return (automata_exp_evaluate(ctx->automata_expander, ctx, str));
+    return (automata_exp_evaluate(ctx->automata_expander, ctx->env, str));
 }
 
 static void	interpreter_expand_btree(t_btree *btree, t_minishell_ctx *ctx)
