@@ -32,15 +32,17 @@ BUILTINS_DIR =		builtins/
 SIGNALS_DIR = 		signals/
 ENV_DIR =			environment/
 TEST_DIR =			test/
+MS_EXIT_DIR =		minishell_exit/
 
-BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))			\
-				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))	\
-				$(addprefix $(BIN_DIR), $(SIGNALS_DIR))		\
-				$(addprefix $(BIN_DIR), $(ENV_DIR))			\
+BIN_DIRS	=	$(addprefix $(BIN_DIR), $(MS_DIR))				\
+				$(addprefix $(BIN_DIR), $(BUILTINS_DIR))		\
+				$(addprefix $(BIN_DIR), $(MS_EXIT_DIR))			\
+				$(addprefix $(BIN_DIR), $(SIGNALS_DIR))			\
+				$(addprefix $(BIN_DIR), $(ENV_DIR))				\
 				$(addprefix $(BIN_DIR), $(AUTOMATA_EXP_DIR))	\
 				$(addprefix $(BIN_DIR), $(AUTOMATA_LEX_DIR))	\
-				$(addprefix $(BIN_DIR), $(TEST_DIR))	\
-				$(addprefix $(BIN_DIR), $(INTERPRETER_DIR))	\
+				$(addprefix $(BIN_DIR), $(TEST_DIR))			\
+				$(addprefix $(BIN_DIR), $(INTERPRETER_DIR))		\
 				$(addprefix $(BIN_DIR), $(LEXER_DIR))
 
 ########################################################################################\
@@ -50,6 +52,8 @@ Sources & objects
 MS_FILES	=	main			\
 				minishell_ctx	\
 				minishell_init	\
+
+MS_EXIT_FILES	=	minishell_exit
 
 LEXER_FILES	=	token			\
 				token_args		\
@@ -97,6 +101,7 @@ TEST_FILES	=	test				\
 				test_automata_lexer
 
 FILES	=	$(addprefix $(MS_DIR), $(MS_FILES))				\
+			$(addprefix $(MS_EXIT_DIR), $(MS_EXIT_FILES))	\
 			$(addprefix $(AUTOMATA_EXP_DIR), $(AUTOMATA_EXP_FILES))	\
 			$(addprefix $(AUTOMATA_LEX_DIR), $(AUTOMATA_LEX_FILES))	\
 			$(addprefix $(LEXER_DIR), $(LEXER_FILES))   	\

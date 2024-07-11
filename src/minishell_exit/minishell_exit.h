@@ -6,13 +6,13 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:26:15 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 21:45:49 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:12:23 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
-# include "../minishell_ctx.h"
+# include "../../include/minishell.h"
 
 typedef enum  e_error_code
 {

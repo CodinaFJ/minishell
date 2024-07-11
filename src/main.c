@@ -6,11 +6,12 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 20:50:15 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:16:53 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "minishell_ctx.h"
 
 void	do_minishell(char **tokens, t_builtin **builtins)
 {

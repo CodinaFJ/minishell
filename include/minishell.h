@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:16:43 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 21:40:48 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:16:33 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "../src/builtins/builtin.h"
 # include "../src/signals/signals.h"
 # include "../src/environment/environment.h"
-# include "../src/minishell_exit/minishell_exit.h"
 # define SHELL_PROMT "\033[32;1mBashCrandicoot> \033[0;39m"
 
 

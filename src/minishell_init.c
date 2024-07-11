@@ -6,11 +6,12 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:42:08 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 21:50:21 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:15:37 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include "minishell_ctx.h"
 
 static void	automatas_init(t_minishell_ctx *ctx)
 {

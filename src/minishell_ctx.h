@@ -14,16 +14,14 @@
 # define MINISHELL_CTX_H
 # include "../lib/libft/include/libft.h"
 # include "../lib/data_structures_C/include/data_structures.h"
-# include "../src/automata/expander/automata_exp.h"
-# include "../src/automata/lexer/automata_lexer.h"
-# include "../src/builtins/builtin.h"
+# include "automata/expander/automata_exp.h"
+# include "automata/lexer/automata_lexer.h"
+# include "builtins/builtin.h"
 
 /* ************************************************************************** */
 /*	Typedefs    															  */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_CTX
-#  define MINISHELL_CTX
 typedef struct s_minishell_ctx
 {
 	struct s_automata_lexer	*automata_lexer;
@@ -33,7 +31,6 @@ typedef struct s_minishell_ctx
 	struct s_list      		*env;
 	char				*input_str;
 }	t_minishell_ctx;
-# endif
 
 void	minishell_ctx_free(t_minishell_ctx *ctx);
 
