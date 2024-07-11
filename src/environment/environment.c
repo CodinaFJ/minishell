@@ -33,83 +33,18 @@ t_list	*environment_create(char **envp)
 	return (env_list);
 }
 
-void	environment_print(t_list *env_list)
+void	environment_print(t_list *env)
 {
-	while (env_list)
+	while (env)
 	{
-		if (env_list == NULL)
+		if (env == NULL)
 			continue; ;
-		environment_variable_print(env_list->content);
-		env_list = env_list->next;
-	}
-}
-
-char	*environment_get(t_list *env ,char *key)
-{
-	t_env_var	*env_var;
-	
-	while (env)
-	{
-		env_var = (t_env_var *) env->content;
-		if (env_var == NULL)
-			continue ;
-		if (ft_strcmp(env_var->key, key) == 0)
-			return (ft_strdup(env_var->content));
+		environment_variable_print(env->content);
 		env = env->next;
 	}
-	return (NULL);
 }
 
-void	environment_set(t_list *env, char *key, char *content)
+void	environment_free(t_list **env)
 {
-	t_env_var	*env_var;
-
-	if (key == NULL || *key == 0)
-		return ;
-	while (env)
-	{
-		env_var = (t_env_var *) env->content;
-		if (env_var == NULL)
-			continue ;
-		if (ft_strcmp(env_var->key, key) == 0)
-		{
-			free(env_var->content);
-			env_var->content = ft_strdup(content);
-			return ;
-		}
-		if (env->next == NULL)
-			break ;
-		env = env->next;
-	}
-	env_var = environment_variable_new(key, content);
-	if (env_var == NULL)
-		return ;
-	ft_lstadd_back(&env, ft_lstnew((void *)env_var));
-}
-
-void	environment_unset(t_list **env, char *key)
-{
-	t_list		*node;
-	t_env_var	*env_var;
-	int			i;
-
-	node = *env;
-	if (key == NULL || *key == 0)
-		return ;
-	i = 0;
-	while (node)
-	{
-		env_var = (t_env_var *) node->content;
-		i++;
-		if (env_var == NULL)
-			continue ;
-		if (ft_strcmp(env_var->key, key) == 0)
-		{
-			environment_variable_free((t_env_var *) ft_lst_remove_at(env, i - 1));
-			return ;
-		}
-		if (node->next == NULL)
-			break ;
-		node = node->next;
-	}
+	ft_lstclear(env, environment_variable_free);
 }

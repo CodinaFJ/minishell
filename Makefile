@@ -48,6 +48,7 @@ Sources & objects
 ########################################################################################
 
 MS_FILES	=	main			\
+				minishell_ctx	\
 				minishell_init	\
 
 LEXER_FILES	=	token			\
@@ -74,6 +75,8 @@ AUTOMATA_EXP_FILES	=	automata_exp_evaluate		\
 						automata_exp_actions		\
 						automata_exp_init			\
 						automata_exp_utils			\
+						automata_exp_actions_utils	\
+						automata_exp_action_extract_var	\
 						automata_exp_transitions
 
 AUTOMATA_LEX_FILES	=	automata_lexer_evaluate		\
@@ -81,7 +84,8 @@ AUTOMATA_LEX_FILES	=	automata_lexer_evaluate		\
 						automata_lexer_init			\
 						automata_lexer_transitions
 
-ENV_FILES =		environment			\
+ENV_FILES =		environment				\
+				environment_operations	\
 				environment_vars
 
 SIGNALS_FILES	=	signals

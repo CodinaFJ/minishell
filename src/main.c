@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:31:07 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/06 20:48:57 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:50:15 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ int	main(int argc, char **argv, char **envp)
 		do_minishell(tokenize(ctx.input_str), ctx.builtins);
         free(ctx.input_str);
 	}
-	ft_lstclear(&ctx.env, environment_variable_free);
-    btree_free(&(ctx.tokens_bt), token_free);
-	automata_lexer_free(ctx.automata_lexer);
-	automata_exp_free(ctx.automata_expander);
+	minishell_ctx_free(&ctx);
 	return (0);
 }

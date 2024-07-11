@@ -17,10 +17,9 @@ static t_rc	minishell_alphabet_exp_init(t_automata_exp *automata)
 	automata->alphabet = ft_calloc(ALPHABET_EXP_LEN + 1, sizeof(char *));
 	if (automata->alphabet == NULL)
 		return (RC_NOK);
-	automata->alphabet[0] = NULL;
 	ft_strs_add_line("0123456789", automata->alphabet);
 	ft_strs_add_line("qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_",
-					 automata->alphabet);
+		automata->alphabet);
 	ft_strs_add_line("$", automata->alphabet);
 	ft_strs_add_line("?!", automata->alphabet);
 	ft_strs_add_line("\'", automata->alphabet);
@@ -28,17 +27,9 @@ static t_rc	minishell_alphabet_exp_init(t_automata_exp *automata)
 	return (RC_OK);
 }
 
-static t_rc	minishell_errors_exp_init(t_automata_exp *automata)
+int	automata_exp_get_state(int i, int j)
 {
-	automata->errors = ft_calloc(AUTOMATA_EXP_STATES + 1, sizeof(char *));
-	if (automata->errors == NULL)
-		return (RC_NOK);
-	return (RC_OK);
-}
-
-int automata_exp_get_state(int i, int j)
-{
-	const int state[][8] = {
+	const int	state[][8] = {
 		//	  # abc   $   ?   '   "   *
 		{0, 0, 1, 0, 4, 5, 0}, // 0 Pre Variable
 		{2, 3, 2, 2, 4, 5, 0}, // 1 Dollar
@@ -48,24 +39,20 @@ int automata_exp_get_state(int i, int j)
 		{5, 5, 1, 5, 5, 5, 5}, // 5 Double quote
 		{6, 6, 6, 6, 6, 6, 6}  // 6 End
 	};
+
 	return (state[i][j]);
 }
 
-t_automata_exp *automata_exp_init(void)
+t_automata_exp	*automata_exp_init(void)
 {
-	t_automata_exp *automata;
+	t_automata_exp	*automata;
 	t_rc			rc;
 
 	rc = RC_OK;
 	automata = ft_calloc(1, sizeof(t_automata_exp));
 	if (automata == NULL)
 		return (NULL);
-	automata->cursor = 0;
-	automata->cursor_pre = 0;
-	automata->state = 0;
 	if (minishell_alphabet_exp_init(automata) == RC_NOK)
-		rc = RC_NOK;
-	if (minishell_errors_exp_init(automata) == RC_NOK)
 		rc = RC_NOK;
 	minishell_actions_exp_init(automata);
 	automata->get_state = automata_exp_get_state;

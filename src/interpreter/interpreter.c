@@ -25,7 +25,11 @@ static t_rc	split_parameters(t_token *token)
 		if (command->command[i] == ' ')
 		{
 			str_aux = ft_substr(command->command, prev_i, i - prev_i);
+			if (str_aux)
+				return (RC_NOK);
 			str_aux = ft_strtrim(str_aux, " ");
+			if (str_aux)
+				return (RC_NOK);
 			ft_strs_add_line(str_aux, command->args);
 			free(str_aux);
 			prev_i = i;
@@ -83,12 +87,8 @@ t_rc	interpreter_get_line(t_minishell_ctx *ctx)
 		return (RC_NOK);
 	add_history(ctx->input_str);
 	interpreter_recognize_tokens(ctx);
-	// btree_print(ctx->tokens_bt, "0", token_print);
 	interpreter_expand(ctx);
-	if (1)
-	{
-		interpreter_structure_commands_params(ctx->tokens_bt);
-	}
+	interpreter_structure_commands_params(ctx->tokens_bt);
 	btree_print(ctx->tokens_bt, "0", token_print);
 	return (RC_OK);
 }

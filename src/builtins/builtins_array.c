@@ -46,3 +46,14 @@ t_bool	try_exec_builtin(t_builtin **builtins_array, char *name, char *args)
 	}
 	return (false);
 }
+
+void	builtins_free(t_builtin	**builtins_array)
+{
+	int	i;
+
+	i = -1;
+	if (builtins_array == NULL)
+		return ;
+	while (builtins_array[++i])
+		builtin_free(builtins_array[i]);		
+}
