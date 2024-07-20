@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_actions_utils.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 19:27:13 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 19:35:21 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:56:39 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata_exp.h"
+#include "../../../include/minishell.h"
 
 int	strr_find_dollar(t_automata_exp *automata)
 {

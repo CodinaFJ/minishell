@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_transitions.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:08:33 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 18:49:16 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:56:48 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata_exp.h"
-#include "libft/include/ft_printf.h"
+#include "../../../include/minishell.h"
 
 void	enter_dollar(t_automata_exp *automata, void *ctx)
 {

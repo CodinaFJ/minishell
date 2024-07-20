@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata_exp.h"
+#include "../../../include/minishell.h"
 
 static t_rc	minishell_alphabet_exp_init(t_automata_exp *automata)
 {

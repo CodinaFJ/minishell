@@ -164,6 +164,7 @@ void	test_automata_exp(void *envp)
 	};
 
 	(void) envp;
+	ft_bzero(&ctx, sizeof(t_minishell_ctx));
 	ctx.env = environment_create(mock_env);
 	ft_printf("\n---------------------------------------------------\n");
 	ft_printf("TEST AUTOMATA EXPANDER\n\n");

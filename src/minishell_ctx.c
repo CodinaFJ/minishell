@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_ctx.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:30:54 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 20:46:55 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:05:35 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_ctx.h"
+#include "../include/minishell.h"
 
 void	minishell_ctx_free(t_minishell_ctx *ctx)
 {
+	if (ctx == NULL)
+		return ;
 	automata_exp_free(ctx->automata_expander);
 	automata_lexer_free(ctx->automata_lexer);
 	environment_free(&(ctx->env));

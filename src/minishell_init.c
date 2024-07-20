@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:42:08 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 22:15:37 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:34:27 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 static void	automatas_init(t_minishell_ctx *ctx)
 {
 	ctx->automata_lexer = automata_lexer_init();
-	if (ctx->automata_lexer)
+	if (ctx->automata_lexer == NULL)
 		minishell_exit_error(ctx, MALLOC_ERR);
 	ctx->automata_expander = automata_exp_init();
-	if (ctx->automata_expander)
+	if (ctx->automata_expander == NULL)
 		minishell_exit_error(ctx, MALLOC_ERR);
 }
 
 void	minishell_init(t_minishell_ctx *ctx, char **envp)
 {
+	ft_bzero(ctx, sizeof(t_minishell_ctx));
 	ctx->env = environment_create(envp);
 	ctx->builtins = builtins_init();
 	if (ctx->env == NULL || ctx->builtins == NULL)
 		minishell_exit_error(ctx, MALLOC_ERR);
 	signals_init();
 	ctx->tokens_bt = btree_new(NULL);
-	if (ctx->tokens_bt)
+	if (ctx->tokens_bt == NULL)
 		minishell_exit_error(ctx, MALLOC_ERR);
 	automatas_init(ctx);
 }

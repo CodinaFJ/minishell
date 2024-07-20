@@ -89,6 +89,6 @@ t_rc	interpreter_get_line(t_minishell_ctx *ctx)
 	interpreter_recognize_tokens(ctx);
 	interpreter_expand(ctx);
 	interpreter_structure_commands_params(ctx->tokens_bt);
-	btree_print(ctx->tokens_bt, "0", token_print);
+	// btree_print(ctx->tokens_bt, "0", token_print); MARINA: si quieres ver el arbol de comandos cada vez que metes uno descomenta esta linea.
 	return (RC_OK);
 }

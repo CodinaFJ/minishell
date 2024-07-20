@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_actions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:24:10 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 21:46:48 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:32:11 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata_exp.h"
+#include "../../../include/minishell.h"
 
 void	end_exp_evaluation(t_automata_exp *automata, void *env)
 {
@@ -67,7 +67,7 @@ void	single_char_var(t_automata_exp *automata, void *ctx)
 	}
 	str_res 
 		= ft_strjoin_free(str_res, automata->str + automata->cursor + 1, FIRST);
-	if (str_res)
+	if (str_res == NULL)
 		minishell_exit_error(ctx, MALLOC_ERR);
 	automata->cursor = automata->cursor - 2 + ft_strlen(str_aux);
 	automata_exp_resume(automata, str_res);

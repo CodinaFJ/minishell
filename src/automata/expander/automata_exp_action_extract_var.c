@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_action_extract_var.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 19:33:45 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 21:48:23 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 22:56:39 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata_exp.h"
+#include "../../../include/minishell.h"
 
 void	extract_variable(t_automata_exp *automata, void *ctx)
 {

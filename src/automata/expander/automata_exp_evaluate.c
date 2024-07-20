@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_evaluate.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 21:48:42 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/20 23:27:35 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "automata_exp.h"
+#include "../../../include/minishell.h"
 
 static int	alphabet_index(char **alphabet, char c)
 {
@@ -53,7 +53,7 @@ char	*automata_exp_evaluate(t_automata_exp *automata, void *ctx, char *str)
 {
 	automata->str = ft_strdup(str);
 	if (automata->str == NULL)
-		minishell_exit_error(ctx, MALLOC_ERR);
+		return (NULL);
 	else if ((automata->str)[0] == '\0')
 		return (automata->str);
 	automata->str_len = (int)ft_strlen(automata->str);
