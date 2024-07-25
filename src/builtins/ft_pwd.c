@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:43:01 by marubio-          #+#    #+#             */
-/*   Updated: 2024/05/26 20:24:31 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:21:15 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 #include <unistd.h>
 
 // TODO: lo del buffer[256] hay que arreglarlo
-void ft_pwd(void *ctx) 
+void ft_pwd(void *command, void *ctx) 
 {
     char cwd[256];
     char *args;
     
     args = (char *) ctx;
+	(void) command;
     (void) args;
     ft_printf("pwd called\n");
     if (getcwd(cwd, sizeof(cwd)) != NULL) {

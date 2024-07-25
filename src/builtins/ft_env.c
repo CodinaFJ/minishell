@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:19:35 by marubio-          #+#    #+#             */
-/*   Updated: 2024/05/26 20:23:16 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/25 22:20:30 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 #include <string.h>
 
 //! lo del  extern char **environ; no se si es legal
-void ft_env(void *ctx) 
+void ft_env(void *command, void *ctx) 
 {
     char *args;
     extern char **environ;
     char **env = environ;
     
+	(void) command;
     args = (char *) ctx;
     ft_printf("env called\n");
     (void) args;

@@ -10,16 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../../include/minishell.h"
 
-t_builtin	*builtin_new(char *name, void (*f)(void *ctx))
+t_builtin	*builtin_new(char *name, void (*f)(void *command, void *ctx))
 {
 	t_builtin	*builtin;
 
 	if (name == NULL || f == NULL)
 		return (NULL);
 	builtin = ft_calloc(1, sizeof(t_builtin));
+	if (builtin == NULL)
+		return (NULL);
 	builtin->name = ft_strdup(name);
+	if (builtin->name == NULL)
+	{
+		free(builtin);
+		return (NULL);
+	}
 	builtin->f = f;
 	return (builtin);	
 }
