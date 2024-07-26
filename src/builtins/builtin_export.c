@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   builtin_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,28 @@
 
 #include "../../include/minishell.h"
 
-void ft_export(void *command, void *ctx)
+static void	print_export(t_minishell_ctx *ctx)
 {
-	t_env_var	*env_var;
+	t_list	*env;
+
+	ctx->env = ft_lst_sort(ctx->env, &environment_variable_cmp);
+	env = ctx->env;
+	while (env)
+	{
+		if (env == NULL)
+			continue ;
+		ft_printf("declare -x ");
+		environment_variable_print(env->content);
+		env = env->next;
+	}
+}
+
+void builtin_export(void *command, void *ctx)
+{
 	t_minishell_ctx *minishell_ctx;
 
 	minishell_ctx = (t_minishell_ctx *) ctx;
-	env_var = environment_variable_parse(command);
-	if (env_var == NULL)
-		return ;
-	environment_set(minishell_ctx->env, env_var->key, env_var->content);
+	if (command == NULL)
+		print_export(ctx);
+	environment_set_str(minishell_ctx->env, (char *) command);
 }

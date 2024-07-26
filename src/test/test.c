@@ -29,10 +29,10 @@ void	print_test_res(char *fun, t_rc rc)
 		{
 		case RC_NULLPTR:
 			ft_printf("NULL PTR");
-			break;
+			break ;
 		default:
-		 	ft_printf("NOK");
-			break;
+			ft_printf("NOK");
+			break ;
 		}
 	}
 	ft_printf("%s\n", RESET);
@@ -40,8 +40,21 @@ void	print_test_res(char *fun, t_rc rc)
 
 t_rc	assert_str(char *result, char *reference)
 {
-	t_rc	rc = RC_OK;
-	
+	t_rc	rc;
+
+	rc = RC_OK;
+	if (result == NULL && reference != NULL)
+	{
+		ft_printf("\nExpected:\t%s\nResult:\t\t%s\n\n", reference, result);
+		return (RC_NOK);
+	}
+	else if (result != NULL && reference == NULL)
+	{
+		ft_printf("\nExpected:\t%s\nResult:\t\t%s\n\n", reference, result);
+		return (RC_NOK);
+	}
+	else if (result == NULL && reference == NULL)
+		return (RC_OK);
 	rc = ft_strcmp(result, reference) == 0 ? rc : RC_NOK;
 	if (rc == RC_NOK)
 		ft_printf("\nExpected:\t%s\nResult:\t\t%s\n\n", reference, result);
@@ -50,8 +63,9 @@ t_rc	assert_str(char *result, char *reference)
 
 t_rc	assert_int(int result, int reference)
 {
-	t_rc	rc = RC_OK;
-	
+	t_rc	rc;
+
+	rc = RC_OK;
 	rc = result == reference ? rc : RC_NOK;
 	if (rc == RC_NOK)
 		ft_printf("Expected:\t%d\nResult:\t%d\n", reference, result);
@@ -60,9 +74,10 @@ t_rc	assert_int(int result, int reference)
 
 t_rc	assert(t_bool expresion)
 {
-	t_rc	rc = RC_OK;
-	
-	rc = expresion == true? rc : RC_NOK;
+	t_rc	rc;
+
+	rc = RC_OK;
+	rc = expresion == true ? rc : RC_NOK;
 	if (rc == RC_NOK)
 		ft_printf("Expected:\ttrue\nResult:\tfalse\n");
 	return (rc);
@@ -70,11 +85,14 @@ t_rc	assert(t_bool expresion)
 
 int	test_minishell(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	test_automata_exp(envp);
 	test_automata_lexer(envp);
 	test_environment(envp);
+	test_export(envp);
+	test_unset(envp);
+	test_env(envp);
 	return (0);
 }

@@ -69,11 +69,11 @@ BUILTINS_FILES	=	builtin			\
 					builtins_array	\
 					ft_cd			\
 					ft_echo			\
-					ft_env			\
+					builtin_env			\
 					ft_exit			\
-					ft_export		\
+					builtin_export	\
 					ft_pwd			\
-					ft_unset	
+					builtin_unset	
 
 AUTOMATA_EXP_FILES	=	automata_exp_evaluate		\
 						automata_exp_actions		\
@@ -97,6 +97,9 @@ SIGNALS_FILES	=	signals
 
 TEST_FILES	=	test				\
 				test_automata_exp	\
+				test_export			\
+				test_unset			\
+				test_env			\
 				test_environment	\
 				test_automata_lexer
 
@@ -156,6 +159,9 @@ run:
 
 test: debug $(NAME)
 	@$(NAME) test
+
+valgrind: debug
+	valgrind --leak-check=full $(NAME) test   
 
 $(BIN_DIR)%.o:$(SRC_DIR)%.c
 	@mkdir -p $(BIN_DIRS)

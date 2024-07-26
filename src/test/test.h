@@ -16,21 +16,15 @@
 
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
+# define YELLOW "\033[0;35m"
 # define RESET "\033[0m"
-
-# ifndef T_RC
-#  define T_RC
-typedef enum e_rc
-{
-	RC_OK,
-	RC_NULLPTR,
-	RC_NOK
-}	t_rc;
-# endif
 
 void	test_automata_exp(void *ctx);
 void	test_automata_lexer(void *ctx);
 void	test_environment(void *ctx);
+void	test_export(void* ctx);
+void	test_unset(void *envp);
+void	test_env(void *envp);
 void	print_test_res(char *fun, t_rc rc);
 
 t_rc	assert_str(char *result, char *reference);

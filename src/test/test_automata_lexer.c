@@ -25,10 +25,10 @@ t_rc	test_automata_lexer_init(void *ctx)
 
 	(void)ctx;
 	automata = automata_lexer_init();
-	rc = assert(automata != NULL);
-	rc = assert(automata->alphabet != NULL);
-	rc = assert(ft_strs_rows((const char **) automata->alphabet) != 0);
-	rc = assert(automata->errors != NULL);
+	rc = assert(automata != NULL) == RC_OK ? rc : RC_NOK;
+	rc = assert(automata->alphabet != NULL) == RC_OK ? rc : RC_NOK;
+	rc = assert(ft_strs_rows((const char **) automata->alphabet) != 0) == RC_OK ? rc : RC_NOK;
+	rc = assert(automata->errors != NULL) == RC_OK ? rc : RC_NOK;
 	automata_lexer_free(automata);
 	return(rc);
 }

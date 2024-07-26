@@ -38,7 +38,7 @@ void	environment_print(t_list *env)
 	while (env)
 	{
 		if (env == NULL)
-			continue; ;
+			continue ;
 		environment_variable_print(env->content);
 		env = env->next;
 	}
