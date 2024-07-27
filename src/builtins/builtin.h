@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 19:42:06 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/26 16:03:51 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:23:14 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool		try_exec_builtin(void *ctx, char *name, char *command);
 void ft_echo(void *command, void *ctx);
 void builtin_env(void *command, void *ctx);
 void ft_pwd(void *command, void *ctx);
-void ft_exit(void *command, void *ctx);
+void builtin_exit(void *command, void *ctx);
 void	builtin_export(void *command, void *ctx);
 void	builtin_unset(void *command, void *ctx);
 

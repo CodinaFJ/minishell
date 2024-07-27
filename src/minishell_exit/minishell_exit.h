@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 20:26:15 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 22:12:23 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:22:06 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 typedef enum  e_error_code
 {
+	OK,
 	MALLOC_ERR,
 	OTHER_ERR
 }	t_error_code;

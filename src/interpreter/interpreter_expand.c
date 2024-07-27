@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 12:30:38 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/11 20:16:49 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:24:03 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	interpreter_expand_btree(t_btree *btree, t_minishell_ctx *ctx)
 	{
 		command = (t_command *) ((t_token_content*)((t_token *)(btree->content))->content);
 		command->command = expand_string(ctx, command->command);
-        ft_printf("command: %s\n", command->command);
+        // ft_printf("command: %s\n", command->command);
 		while (command->args[++i] != NULL)
         {
 			command->args[i] = expand_string(ctx, command->args[i]);
-            ft_printf("arg: %s\n", command->args[i]);
+            // ft_printf("arg: %s\n", command->args[i]);
         } 
 	}
 	if (btree->left != NULL)

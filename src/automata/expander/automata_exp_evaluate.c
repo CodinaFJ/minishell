@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_evaluate.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/20 23:27:35 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:36:55 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	automata_evaluate_char(t_automata_exp *automata, void *ctx)
 char	*automata_exp_evaluate(t_automata_exp *automata, void *ctx, char *str)
 {
 	automata->str = ft_strdup(str);
+	free(str);
 	if (automata->str == NULL)
 		return (NULL);
 	else if ((automata->str)[0] == '\0')

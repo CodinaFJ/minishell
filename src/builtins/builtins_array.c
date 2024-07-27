@@ -14,7 +14,7 @@
 
 static t_bool	is_array_correct(t_builtin **builtins_array)
 {
-	unsigned int	i;
+	int	i;
 
 	i = -1;
 	while (++i < N_BUILTINS)
@@ -28,7 +28,7 @@ static t_bool	is_array_correct(t_builtin **builtins_array)
 	return (true);
 }
 
-t_builtin	**builtins_init()
+t_builtin	**builtins_init(void)
 {
 	t_builtin	**builtins_array;
 	int			i;
@@ -37,13 +37,12 @@ t_builtin	**builtins_init()
 	builtins_array = ft_calloc(N_BUILTINS + 1, sizeof(t_builtin *));
 	if (builtins_array == NULL)
 		return (NULL);
-	builtins_array[i++] = builtin_new("echo", ft_echo);
-	builtins_array[i++] = builtin_new("env", builtin_env);
-	builtins_array[i++] = builtin_new("pwd", ft_pwd);
-	builtins_array[i++] = builtin_new("exit", ft_exit);
-	builtins_array[i++] = builtin_new("export", ft_exit);
-	builtins_array[i++] = builtin_new("unset", ft_exit);
-	builtins_array[i++] = NULL;
+	builtins_array[0] = builtin_new("echo", ft_echo);
+	builtins_array[1] = builtin_new("env", builtin_env);
+	builtins_array[2] = builtin_new("pwd", ft_pwd);
+	builtins_array[3] = builtin_new("exit", builtin_exit);
+	builtins_array[4] = builtin_new("export", builtin_export);
+	builtins_array[5] = builtin_new("unset", builtin_unset);
 	if (is_array_correct(builtins_array))
 		return (builtins_array);
 	return (NULL);
@@ -51,16 +50,16 @@ t_builtin	**builtins_init()
 
 t_bool	try_exec_builtin(void *ctx, char *name, char *command)
 {
-	int	i;
+	int				i;
 	t_minishell_ctx	*mini_ctx;
 
 	i = 0;
 	mini_ctx = (t_minishell_ctx *)ctx;
-	// ft_printf("Try exec builtin: %s\n", name);
 	while (mini_ctx->builtins[i] != NULL)
 	{
 		if (ft_strcmp(mini_ctx->builtins[i]->name, name) == 0)
 		{
+			// ft_printf("Try exec builtin: %s\n", name);
 			mini_ctx->builtins[i]->f(command, ctx);
 			return (true);
 		}
@@ -69,7 +68,7 @@ t_bool	try_exec_builtin(void *ctx, char *name, char *command)
 	return (false);
 }
 
-void	*builtins_free(t_builtin	**builtins_array)
+void	*builtins_free(t_builtin **builtins_array)
 {
 	int	i;
 
@@ -77,6 +76,6 @@ void	*builtins_free(t_builtin	**builtins_array)
 	if (builtins_array == NULL)
 		return (NULL);
 	while (++i < N_BUILTINS && builtins_array[i])
-		builtin_free(builtins_array[i]);		
-	return(NULL);
+		builtin_free(builtins_array[i]);
+	return (NULL);
 }

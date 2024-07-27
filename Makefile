@@ -70,7 +70,7 @@ BUILTINS_FILES	=	builtin			\
 					ft_cd			\
 					ft_echo			\
 					builtin_env			\
-					ft_exit			\
+					builtin_exit			\
 					builtin_export	\
 					ft_pwd			\
 					builtin_unset	

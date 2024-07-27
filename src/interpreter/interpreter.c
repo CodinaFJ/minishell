@@ -14,6 +14,7 @@ static t_rc	split_parameters(t_token *token)
 {
 	const t_command		*command = (t_command *) token->content;
 	char				*str_aux;
+	char				*str_aux2;
 	char				quote;
 	unsigned int		prev_i;
 	unsigned int		i;
@@ -44,9 +45,10 @@ static t_rc	split_parameters(t_token *token)
 		}
 	}
 	str_aux = ft_substr(command->command, prev_i, i - prev_i);
-	str_aux = ft_strtrim(str_aux, " ");
-	ft_strs_add_line(str_aux, command->args);
+	str_aux2 = ft_strtrim(str_aux, " ");
 	free(str_aux);
+	ft_strs_add_line(str_aux2, command->args);
+	free(str_aux2);
 	return (RC_OK);
 }
 
