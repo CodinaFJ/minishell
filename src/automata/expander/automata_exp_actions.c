@@ -6,7 +6,7 @@
 /*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:24:10 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/27 10:43:58 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:48:03 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,4 @@ void	remove_dollar(t_automata_exp *automata, void *ctx)
 	free(automata->str);
 	automata->str = str_res;
 	automata->cursor--;
-}
-
-void	single_char_var(t_automata_exp *automata, void *ctx)
-{
-	char	*str_res;
-	char	var_key;
-	char	*str_aux;
-	int		i;
-	int		str_aux_len;
-
-	(void)ctx;
-	i = automata->cursor - 1;
-	var_key = automata->str[automata->cursor];
-	str_res = ft_calloc(1, i + 1);
-	str_aux = NULL;
-	str_aux_len = 0;
-	if (str_res == NULL)
-		return ;
-	ft_strncpy(str_res, automata->str, i);
-	if (var_key == '$')
-	{
-		str_aux = ft_itoa(getpid());
-		str_aux_len = ft_strlen(str_aux);
-		str_res = ft_strjoin_free(str_res, str_aux, BOTH);
-		if (str_res == NULL)
-			minishell_exit_error(ctx, MALLOC_ERR);
-	}
-	str_res 
-		= ft_strjoin_free(str_res, automata->str + automata->cursor + 1, FIRST);
-	if (str_res == NULL)
-		minishell_exit_error(ctx, MALLOC_ERR);
-	automata->cursor = automata->cursor - 2 + str_aux_len;
-	automata_exp_resume(automata, str_res);
 }

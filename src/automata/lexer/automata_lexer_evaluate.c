@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_lexer_evaluate.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:22:16 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/06 22:35:27 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:09:20 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	alphabet_index(char **alphabet, char c)
 {
 	int	i;
-	
+
 	i = 0;
 	while (alphabet[i] != NULL)
 	{
@@ -34,18 +34,24 @@ static void	automata_evaluate_start(t_automata_lexer *automata)
 	automata->cursor_pre = 0;
 }
 
-static void automata_evaluate_char(t_automata_lexer *automata, void *automata_ctx)
+static void	automata_evaluate_char(t_automata_lexer *automata,
+	void *automata_ctx)
 {
-	automata->state = automata->get_state(automata->state, alphabet_index(automata->alphabet, automata->str[automata->cursor]));
+	automata->state = automata->get_state(
+			automata->state,
+			alphabet_index(
+				automata->alphabet,
+				automata->str[automata->cursor]));
 	if (automata->state_enter_action[automata->state])
 		automata->state_enter_action[automata->state](automata, automata_ctx);
 	if (automata->state_trans_action[automata->prev_state][automata->state])
-		automata->state_trans_action[automata->prev_state][automata->state](automata, automata_ctx);
+		automata->state_trans_action[automata->prev_state][automata->state]
+			(automata, automata_ctx);
 	automata->prev_state = automata->state;
 	automata->cursor++;
 }
 
-static void automata_evaluate_end(t_automata_lexer *automata, void *ctx)
+static void	automata_evaluate_end(t_automata_lexer *automata, void *ctx)
 {
 	automata->end_eval_action(automata, ctx);
 	if (automata->str != NULL)
@@ -55,12 +61,12 @@ static void automata_evaluate_end(t_automata_lexer *automata, void *ctx)
 	}
 }
 
-int	automata_lexer_evaluate(t_automata_lexer *automata, void *automata_ctx, char *str)
+int	automata_lexer_evaluate(t_automata_lexer *automata, void *automata_ctx,
+	char *str)
 {
 	automata->str = ft_strdup(str);
 	if (automata->str == NULL || (automata->str)[0] == '\0')
 		return (0);
-	// ft_printf("Evaluate string [%s]\n", str);
 	automata->str_len = (int) ft_strlen(automata->str);
 	automata_evaluate_start(automata);
 	while (automata->cursor < automata->str_len)
@@ -68,27 +74,3 @@ int	automata_lexer_evaluate(t_automata_lexer *automata, void *automata_ctx, char
 	automata_evaluate_end(automata, automata_ctx);
 	return (automata->state);
 }
-
-
-void    automata_lexer_free(t_automata_lexer *automata)
-{
-	unsigned int	i;
-
-	i = -1;
-    if (automata == NULL)
-        return ;
-    if (automata->alphabet != NULL)
-        ft_strs_free(automata->alphabet);
-    if (automata->errors != NULL)
-	{
-		while (++i <= AUTOMATA_LEXER_STATES)
-		{
-			if (automata->errors[i] == NULL)
-				continue ;
-			free(automata->errors[i]);
-		}
-		free(automata->errors);
-	}
-	free(automata);
-}
-

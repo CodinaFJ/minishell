@@ -132,6 +132,7 @@ t_rc	test_automata_exp_one_char_vars(void *ctx)
 	char			*str_aux;
 	t_minishell_ctx *mini_ctx = (t_minishell_ctx *) ctx;
 
+	mini_ctx->pid = getpid();
 	str_res = automata_exp_evaluate(mini_ctx->automata_expander, mini_ctx, "foo$1bar");
 	rc = assert_str(str_res, "foobar") == RC_OK ? rc : RC_NOK;
 	free(str_res);

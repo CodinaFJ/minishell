@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_lexer.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 20:17:32 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/13 22:54:56 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:13:26 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../../lexer/token.h"
 
 /* ************************************************************************** */
-/*	Typedefs    															  */
+/*	Typedefs																  */
 /* ************************************************************************** */
 
 typedef struct s_automata_lexer
@@ -34,12 +34,13 @@ typedef struct s_automata_lexer
 	int		cursor_pre;
 	int		str_len;
 	void	(*state_enter_action[20])(struct s_automata_lexer *a, void *ctx);
-	void	(*state_trans_action[20][20])(struct s_automata_lexer *a, void *ctx);
+	void	(*state_trans_action[20][20])(struct s_automata_lexer *a,
+			void *ctx);
 	void	(*end_eval_action)(struct s_automata_lexer *a, void *ctx);
 	int		(*get_state)(int state, int char_index);
 }	t_automata_lexer;
 
-typedef enum	e_automata_state
+typedef enum e_automata_state
 {
 	L_EMPTY,
 	L_WORD,
@@ -59,12 +60,13 @@ typedef enum	e_automata_state
 }	t_automata_state;
 
 t_automata_lexer	*automata_lexer_init(void);
-int     			automata_get_state(int i, int j);
-void        		minishell_actions_lexer_init(t_automata_lexer *automata);
-void        		end_evaluation(t_automata_lexer *automata, void *ctx);
-void        		get_token_oprtr(t_automata_lexer *automata, void *ctx);
-void        		get_token_command(t_automata_lexer *automata, void *ctx);
-int	                automata_lexer_evaluate(t_automata_lexer *automata, void *automata_ctx, char *str);
-void                automata_lexer_free(t_automata_lexer *automata);
+int					automata_get_state(int i, int j);
+void				minishell_actions_lexer_init(t_automata_lexer *automata);
+void				end_evaluation(t_automata_lexer *automata, void *ctx);
+void				get_token_oprtr(t_automata_lexer *automata, void *ctx);
+void				get_token_command(t_automata_lexer *automata, void *ctx);
+int					automata_lexer_evaluate(t_automata_lexer *automata,
+						void *automata_ctx, char *str);
+void				automata_lexer_free(t_automata_lexer *automata);
 
 #endif

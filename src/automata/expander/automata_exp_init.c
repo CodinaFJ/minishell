@@ -30,14 +30,13 @@ static t_rc	minishell_alphabet_exp_init(t_automata_exp *automata)
 int	automata_exp_get_state(int i, int j)
 {
 	const int	state[][8] = {
-		//	  # abc   $   ?   '   "   *
-		{0, 0, 1, 0, 4, 5, 0}, // 0 Pre Variable
-		{2, 3, 2, 2, 4, 5, 0}, // 1 Dollar
-		{0, 0, 1, 0, 4, 5, 0}, // 2 Single character variable
-		{3, 3, 1, 0, 4, 5, 0}, // 3 String variable
-		{4, 4, 4, 4, 0, 4, 4}, // 4 Simple quote
-		{5, 5, 1, 5, 5, 5, 5}, // 5 Double quote
-		{6, 6, 6, 6, 6, 6, 6}  // 6 End
+	{0, 0, 1, 0, 4, 5, 0},
+	{2, 3, 2, 2, 4, 5, 0},
+	{0, 0, 1, 0, 4, 5, 0},
+	{3, 3, 1, 0, 4, 5, 0},
+	{4, 4, 4, 4, 0, 4, 4},
+	{5, 5, 1, 5, 5, 5, 5},
+	{6, 6, 6, 6, 6, 6, 6}
 	};
 
 	return (state[i][j]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_lexer_init.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:11:02 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/06/29 13:02:59 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:03:55 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,30 @@ void	minishell_errors_lexer_init(t_automata_lexer	*automata)
 int	automata_get_state(int i, int j)
 {
 	const int	state[][8] = {
-	//	\S    '   "   |   &   <   >   *
-		{ 0,  2,  3, 11,  2,  1,  1,  1}, // 0 Empty input
-		{ 1,  2,  3,  4,  6,  8, 10,  1}, // 1 Word
-		{ 2, 12,  2,  2,  2,  2,  2,  2}, // 2 Open single quote
-		{ 3,  3, 12,  3,  3,  3,  3,  3}, // 3 Open double quote
-		{ 1,  2,  3,  5, 14, 14, 14,  1}, // 4 | operator
-		{ 1,  2,  3, 14, 14, 14, 14,  1}, // 5 || operator
-		{ 1,  2,  3, 14,  7, 14, 14,  1}, // 6 & operator
-		{ 1,  2,  3, 14, 14, 14, 14,  1}, // 7 && operator
-		{ 1,  2,  3, 14, 14,  9, 14,  1}, // 8 < operator
-		{ 1,  2,  3, 14, 14, 14, 14,  1}, // 9 << operator
-		{ 1,  2,  3, 14, 14, 14, 11,  1}, // 10 > operator
-		{ 1,  2,  3, 14, 14, 14, 14,  1}, // 11 >> operator
-		{ 1,  2,  3,  4,  6,  8, 10,  1}, // 12 Tentative token end
-		{13,  2,  3,  4,  6,  8, 10,  1}, // 13 Token end
-		{14, 14, 14, 14, 14, 14, 14, 14}, // 14 Error
+	{0, 2, 3, 11, 2, 1, 1, 1},
+	{1, 2, 3, 4, 6, 8, 10, 1},
+	{2, 12, 2, 2, 2, 2, 2, 2},
+	{3, 3, 12, 3, 3, 3, 3, 3},
+	{1, 2, 3, 5, 14, 14, 14, 1},
+	{1, 2, 3, 14, 14, 14, 14, 1},
+	{1, 2, 3, 14, 7, 14, 14, 1},
+	{1, 2, 3, 14, 14, 14, 14, 1},
+	{1, 2, 3, 14, 14, 9, 14, 1},
+	{1, 2, 3, 14, 14, 14, 14, 1},
+	{1, 2, 3, 14, 14, 14, 11, 1},
+	{1, 2, 3, 14, 14, 14, 14, 1},
+	{1, 2, 3, 4, 6, 8, 10, 1},
+	{13, 2, 3, 4, 6, 8, 10, 1},
+	{14, 14, 14, 14, 14, 14, 14, 14},
 	};
-	//ft_printf("From state %d move to %d\n", i, state[i][j]);
+
 	return (state[i][j]);
 }
 
 t_automata_lexer	*automata_lexer_init(void)
 {
 	t_automata_lexer	*automata;
-	
-	//ft_printf("Automata initialization\n");
+
 	automata = ft_calloc(1, sizeof(t_automata_lexer));
 	if (automata == NULL)
 		return (NULL);

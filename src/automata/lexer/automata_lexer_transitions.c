@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   automata_actions_init.c                            :+:      :+:    :+:   */
+/*   automata_lexer_transitions.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:08:33 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/21 20:21:08 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:12:39 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ static void	trans_from_oprtr(t_automata_lexer *automata)
 	}
 }
 
-static void trans_to_token_end(t_automata_lexer *automata)
+static void	trans_to_token_end(t_automata_lexer *automata)
 {
 	automata->state_trans_action[L_WORD][L_TOKEN_END] = get_token_command;
-	automata->state_trans_action[L_TENT_TOKEN_END][L_TOKEN_END] = get_token_command;
+	automata->state_trans_action[L_TENT_TOKEN_END][L_TOKEN_END]
+		= get_token_command;
 }
 
 void	minishell_actions_lexer_init(t_automata_lexer *automata)

@@ -81,11 +81,13 @@ AUTOMATA_EXP_FILES	=	automata_exp_evaluate		\
 						automata_exp_utils			\
 						automata_exp_actions_utils	\
 						automata_exp_action_extract_var	\
+						automata_exp_actions_singlechar_var	\
 						automata_exp_transitions
 
 AUTOMATA_LEX_FILES	=	automata_lexer_evaluate		\
 						automata_lexer_actions		\
 						automata_lexer_init			\
+						automata_lexer_free			\
 						automata_lexer_transitions
 
 ENV_FILES =		environment				\

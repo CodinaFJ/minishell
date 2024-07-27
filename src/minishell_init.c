@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
+/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:42:08 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/20 23:34:27 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/27 12:29:25 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	automatas_init(t_minishell_ctx *ctx)
 void	minishell_init(t_minishell_ctx *ctx, char **envp)
 {
 	ft_bzero(ctx, sizeof(t_minishell_ctx));
+	ctx->pid = getpid();
+	ctx->last_execution_code = 0;
 	ctx->env = environment_create(envp);
 	ctx->builtins = builtins_init();
 	if (ctx->env == NULL || ctx->builtins == NULL)
