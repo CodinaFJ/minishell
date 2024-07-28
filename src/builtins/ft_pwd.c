@@ -12,42 +12,23 @@
 
 #include "../../include/minishell.h"
 
-#include "builtin.h"
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-
-// TODO: lo del buffer[256] hay que arreglarlo
-void ft_pwd(void *command, void *ctx) 
+void	ft_pwd(void *command, void *ctx)
 {
-    char cwd[256];
-    char *args;
-    
-    args = (char *) ctx;
-	(void) command;
-    (void) args;
-    ft_printf("pwd called\n");
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        printf("%s\n", cwd);
-    } else {
-        perror("getcwd() error");
-    }
+	char	*cwd;
+	char	*args;
+
+	args = (char *)ctx;
+	(void)command;
+	(void)args;
+	cwd = getcwd(NULL, 0);
+	ft_printf("pwd called\n");
+	if (cwd != NULL)
+	{
+		ft_printf("%s\n", cwd);
+		free(cwd);
+	}
+	else
+	{
+		perror("getcwd() error");
+	}
 }
-
-/*int main() 
-{
-    char input[256];
-
-    while (1) 
-    {
-        printf("MiShell> ");
-        fgets(input, sizeof(input), stdin);
-        input[strcspn(input, "\n")] = '\0';
-        if (strcmp(input, "exit") == 0)
-            break;
-        else if (strcmp(input, "pwd") == 0)
-            ft_pwd();
-    }
-
-    return (0);
-}*/
