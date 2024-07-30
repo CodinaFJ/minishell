@@ -39,7 +39,7 @@ t_builtin	**builtins_init(void)
 		return (NULL);
 	builtins_array[0] = builtin_new("echo", ft_echo);
 	builtins_array[1] = builtin_new("env", builtin_env);
-	builtins_array[2] = builtin_new("pwd", ft_pwd);
+	builtins_array[2] = builtin_new("pwd", builtin_pwd);
 	builtins_array[3] = builtin_new("exit", builtin_exit);
 	builtins_array[4] = builtin_new("export", builtin_export);
 	builtins_array[5] = builtin_new("unset", builtin_unset);

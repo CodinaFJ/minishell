@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marubio- <marubio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:43:01 by marubio-          #+#    #+#             */
-/*   Updated: 2024/07/25 22:21:15 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/07/30 11:13:19 by marubio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_pwd(void *command, void *ctx)
+void	builtin_pwd(void *command, void *ctx)
 {
 	char	*cwd;
 	char	*args;
@@ -28,7 +28,5 @@ void	ft_pwd(void *command, void *ctx)
 		free(cwd);
 	}
 	else
-	{
 		perror("getcwd() error");
-	}
 }

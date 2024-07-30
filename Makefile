@@ -72,7 +72,7 @@ BUILTINS_FILES	=	builtin			\
 					builtin_env			\
 					builtin_exit			\
 					builtin_export	\
-					ft_pwd			\
+					builtin_pwd			\
 					builtin_unset	
 
 AUTOMATA_EXP_FILES	=	automata_exp_evaluate		\
