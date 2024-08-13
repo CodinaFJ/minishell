@@ -1,6 +1,6 @@
 # minishell
 
 ### TO DO
-- Adapt number of args of commands (currently set to macro)
-- Manage quotes (I guess they should be simplified somehow)
-- Free everything correctly
+- Add translation funcs between list env and array of strings for execve.
+- Add perror custom func, coupled with errno and strerrno.
+- We need to save errno right after execve, it could be lost.
