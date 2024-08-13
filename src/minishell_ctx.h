@@ -30,7 +30,7 @@ typedef struct s_minishell_ctx
 	struct s_btree     		*tokens_bt;
 	struct s_list      		*env;
 	int						pid;
-	int						last_execution_code;
+	int						errsv;
 	char				*input_str;
 }	t_minishell_ctx;
 

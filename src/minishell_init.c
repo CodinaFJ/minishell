@@ -27,7 +27,7 @@ void	minishell_init(t_minishell_ctx *ctx, char **envp)
 {
 	ft_bzero(ctx, sizeof(t_minishell_ctx));
 	ctx->pid = getpid();
-	ctx->last_execution_code = 0;
+	ctx->errsv = 0;
 	ctx->env = environment_create(envp);
 	ctx->builtins = builtins_init();
 	if (ctx->env == NULL || ctx->builtins == NULL)

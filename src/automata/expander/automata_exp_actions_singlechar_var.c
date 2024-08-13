@@ -22,7 +22,7 @@ static char	*expand_execution_code(t_automata_exp *automata, void *ctx)
 	if (str_res == NULL)
 		minishell_exit_error(ctx, MALLOC_ERR);
 	ft_strncpy(str_res, automata->str, automata->cursor - 1);
-	str_aux = ft_itoa(((t_minishell_ctx *)ctx)->last_execution_code);
+	str_aux = ft_itoa(((t_minishell_ctx *)ctx)->errsv);
 	if (str_aux == NULL)
 	{
 		free(str_res);
