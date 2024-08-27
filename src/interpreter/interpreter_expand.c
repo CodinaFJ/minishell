@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreter_expand.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 12:30:38 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/27 13:05:31 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:07:14 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ static char	*expand_string(t_minishell_ctx *ctx, char *str)
 
 static void	interpreter_expand_btree(t_btree *btree, t_minishell_ctx *ctx)
 {
-	int			i;
 	char		*str_aux;
 	t_command	*command;
 
-	i = -1;
 	if (((t_token *)(btree->content))->id == COMMAND)
 	{
 		command = (t_command *) ((t_token_content*)((t_token *)(btree->content))->content);

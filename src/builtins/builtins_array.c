@@ -31,9 +31,7 @@ static t_bool	is_array_correct(t_builtin **builtins_array)
 t_builtin	**builtins_init(void)
 {
 	t_builtin	**builtins_array;
-	int			i;
 
-	i = 0;
 	builtins_array = ft_calloc(N_BUILTINS + 1, sizeof(t_builtin *));
 	if (builtins_array == NULL)
 		return (NULL);
