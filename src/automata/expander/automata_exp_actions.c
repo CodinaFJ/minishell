@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_exp_actions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:24:10 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/27 12:48:03 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:17:32 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	end_exp_evaluation(t_automata_exp *automata, void *env)
 	if (automata->state == E_STRING_VAR)
 		extract_variable(automata, env);
 	if (automata->errors != NULL && automata->errors[automata->state] != NULL)
-		ft_printf("[ERROR] -> %s\n", automata->errors[automata->state]);
+		printf("[ERROR] -> %s\n", automata->errors[automata->state]);
 }
 
 void	abort_automata(t_automata_exp *automata, void *ctx)

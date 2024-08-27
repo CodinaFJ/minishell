@@ -207,8 +207,8 @@ void	test_automata_lexer(void *ctx)
 
 	ctx = btree;
 
-	ft_printf("\n---------------------------------------------------\n");
-	ft_printf("TEST AUTOMATA LEXER\n\n");
+	printf("\n---------------------------------------------------\n");
+	printf("TEST AUTOMATA LEXER\n\n");
 
 	print_test_res("automata_lexer_init", test_automata_lexer_init(ctx));
 	print_test_res("test_automata_lexer_single_command", test_automata_lexer_single_command(ctx));
@@ -219,5 +219,5 @@ void	test_automata_lexer(void *ctx)
 	print_test_res("test_automata_lexer_multiple_command_squotes", test_automata_lexer_multiple_command_squotes(ctx));
 
 	btree_free(&btree, token_free);
-	ft_printf("---------------------------------------------------\n");
+	printf("---------------------------------------------------\n");
 }

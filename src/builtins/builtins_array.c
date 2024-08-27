@@ -57,7 +57,7 @@ t_bool	try_exec_builtin(void *ctx, char *name, char *command)
 	{
 		if (ft_strcmp(mini_ctx->builtins[i]->name, name) == 0)
 		{
-			// ft_printf("Try exec builtin: %s\n", name);
+			// printf("Try exec builtin: %s\n", name);
 			mini_ctx->builtins[i]->f(command, ctx);
 			return (true);
 		}

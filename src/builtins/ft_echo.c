@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marubio- <marubio-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:41:46 by marubio-          #+#    #+#             */
-/*   Updated: 2024/07/28 18:37:45 by marubio-         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:17:32 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void ft_echo(void *command ,void *ctx)
     while (*args == ' ')
         args++;
 
-    ft_printf("Echo called\n");
+    printf("Echo called\n");
     if (*args == '\0') 
 	{
         printf("\n");

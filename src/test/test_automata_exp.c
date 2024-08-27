@@ -167,8 +167,8 @@ void	test_automata_exp(void *envp)
 	(void) envp;
 	ft_bzero(&ctx, sizeof(t_minishell_ctx));
 	ctx.env = environment_create(mock_env);
-	ft_printf("\n---------------------------------------------------\n");
-	ft_printf("TEST AUTOMATA EXPANDER\n\n");
+	printf("\n---------------------------------------------------\n");
+	printf("TEST AUTOMATA EXPANDER\n\n");
 
 	print_test_res("test_automata_exp_init", test_automata_exp_init(&ctx));
 	print_test_res("test_automata_exp_null_parses", test_automata_exp_null_parses(&ctx));
@@ -178,5 +178,5 @@ void	test_automata_exp(void *envp)
 
 	ft_lstclear(&ctx.env, environment_variable_free);
 	automata_exp_free(ctx.automata_expander);
-	ft_printf("---------------------------------------------------\n");
+	printf("---------------------------------------------------\n");
 }

@@ -376,8 +376,8 @@ static t_rc	test_environment_null_strings_create(void *ctx)
 
 void	test_environment(void *ctx)
 {
-	ft_printf("\n---------------------------------------------------\n");
-	ft_printf("TEST ENVIRONMENT\n\n");
+	printf("\n---------------------------------------------------\n");
+	printf("TEST ENVIRONMENT\n\n");
 	
 	print_test_res("environment_new_variable", test_environment_new_variable(ctx));
 	print_test_res("environment_create", test_environment_create(ctx));
@@ -389,5 +389,5 @@ void	test_environment(void *ctx)
 	print_test_res("environment_set_str", test_environment_set_str(ctx));
 	print_test_res("environment_unset", test_environment_unset(ctx));
 
-	ft_printf("---------------------------------------------------\n");
+	printf("---------------------------------------------------\n");
 }

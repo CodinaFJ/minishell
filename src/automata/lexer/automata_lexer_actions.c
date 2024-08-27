@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   automata_lexer_actions.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcodina- <jcodina-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 18:24:10 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/27 14:12:00 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:17:32 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	end_evaluation(t_automata_lexer *automata, void *ctx)
 {
 	if (automata->errors[automata->state] != NULL)
 	{
-		ft_printf("[ERROR] -> %s\n", automata->errors[automata->state]);
+		printf("[ERROR] -> %s\n", automata->errors[automata->state]);
 		return ;
 	}
 	get_token_command(automata, ctx);

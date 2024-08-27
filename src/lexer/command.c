@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 12:50:34 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/07/06 22:54:29 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:17:32 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void		command_print(t_command *command)
 	if (command == NULL)
 		return ;
 	if (command->command != NULL)
-		ft_printf("Command: %s\n", command->command);
+		printf("Command: %s\n", command->command);
 	else
-		ft_printf("Command: (null)\n");
-	ft_printf("Args: \n");
+		printf("Command: (null)\n");
+	printf("Args: \n");
 	ft_strs_print((const char **) command->args);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jcodina- <fjavier.codina@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:04:27 by jcodina-          #+#    #+#             */
-/*   Updated: 2024/02/01 21:47:15 by jcodina-         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:17:32 by jcodina-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	handle_signal_sigint(void)
 {
-	ft_printf("\n");
-	ft_printf(SHELL_PROMT);
+	printf("\n");
+	printf(SHELL_PROMT);
 }
 
 void	handle_signal_sigquit(void)

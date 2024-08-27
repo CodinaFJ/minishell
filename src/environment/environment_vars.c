@@ -70,10 +70,10 @@ void	environment_variable_print(t_env_var *var)
 {
 	if (var == NULL)
 	{
-		ft_printf("(null)\n");
+		printf("(null)\n");
 		return ;
 	}
-	ft_printf("%s=\"%s\"\n", var->key, var->content);
+	printf("%s=\"%s\"\n", var->key, var->content);
 }
 void	environment_variable_free(void *var)
 {

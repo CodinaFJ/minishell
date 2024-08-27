@@ -22,7 +22,7 @@ static void	print_export(t_minishell_ctx *ctx)
 	{
 		if (env == NULL)
 			continue ;
-		ft_printf("declare -x ");
+		printf("declare -x ");
 		environment_variable_print(env->content);
 		env = env->next;
 	}

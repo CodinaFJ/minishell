@@ -68,9 +68,9 @@ static t_rc test_export_empty_var(void *ctx)
 
 static t_rc test_export_print(void *ctx)
 {
-	ft_printf("\n");
+	printf("\n");
 	builtin_export(NULL, ctx);
-	ft_printf("\n");
+	printf("\n");
 
 	return (RC_OK);
 }
@@ -91,13 +91,13 @@ void	test_export(void *envp)
 	(void) envp;
 	ft_bzero(&ctx, sizeof(t_minishell_ctx));
 	ctx.env = environment_create(mock_env);
-	ft_printf("\n---------------------------------------------------\n");
-	ft_printf("TEST EXPORT\n\n");
+	printf("\n---------------------------------------------------\n");
+	printf("TEST EXPORT\n\n");
 	
 	print_test_res("test_export_var", test_export_var(&ctx));
 	print_test_res("test_export_empty_var", test_export_empty_var(&ctx));
 	print_test_res("test_export_empty", test_export_print(&ctx));
 
-	ft_printf("---------------------------------------------------\n");
+	printf("---------------------------------------------------\n");
 	environment_free(&ctx.env);
 }

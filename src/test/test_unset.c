@@ -44,11 +44,11 @@ void	test_unset(void *envp)
 	(void) envp;
 	ft_bzero(&ctx, sizeof(t_minishell_ctx));
 	ctx.env = environment_create(mock_env);
-	ft_printf("\n---------------------------------------------------\n");
-	ft_printf("TEST UNSET\n\n");
+	printf("\n---------------------------------------------------\n");
+	printf("TEST UNSET\n\n");
 	
 	print_test_res("test_unset_var", test_unset_var(&ctx));
 
-	ft_printf("---------------------------------------------------\n");
+	printf("---------------------------------------------------\n");
 	environment_free(&ctx.env);
 }
